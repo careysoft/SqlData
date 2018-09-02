@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Careysoft.Dotnet.Tools.SqlD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Careysoft.Dotnet.Tools.SqlData.Model", "Careysoft.Dotnet.Tools.SqlData.Model\Careysoft.Dotnet.Tools.SqlData.Model.csproj", "{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Careysoft.Dotnet.Tools.SqlData.Access", "Careysoft.Dotnet.Tools.SqlData.Access\Careysoft.Dotnet.Tools.SqlData.Access.csproj", "{001B6879-8124-454D-B4EA-B98F15798E71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{001B6879-8124-454D-B4EA-B98F15798E71}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}</ProjectGuid>
+    <ProjectGuid>{001B6879-8124-454D-B4EA-B98F15798E71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Careysoft.Dotnet.Tools.SqlData.Model</RootNamespace>
-    <AssemblyName>Careysoft.Dotnet.Tools.SqlData.Model</AssemblyName>
+    <RootNamespace>Careysoft.Dotnet.Tools.SqlData.Access</RootNamespace>
+    <AssemblyName>Careysoft.Dotnet.Tools.SqlData.Access</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,15 +33,28 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="XMLDbHelper">
+      <HintPath>..\..\..\..\..\99公共模块\XMLDbHelper\XMLDbHelper\bin\Debug\XMLDbHelper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="T_BASE_SJYPZModel.cs" />
+    <Compile Include="Access\FactoryT_BASE_SJYPZAccess.cs" />
+    <Compile Include="Access\IT_BASE_SJYPZAccess.cs" />
+    <Compile Include="Access\Oracle\T_BASE_SJYPZAccess.cs" />
+    <Compile Include="DataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.Model\Careysoft.Dotnet.Tools.SqlData.Model.csproj">
+      <Project>{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}</Project>
+      <Name>Careysoft.Dotnet.Tools.SqlData.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

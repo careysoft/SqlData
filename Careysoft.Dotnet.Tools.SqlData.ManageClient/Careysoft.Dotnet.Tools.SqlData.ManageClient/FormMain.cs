@@ -79,20 +79,20 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             //    navBarControl1.Groups.Add(nb);
             //}
 
-            //NavBarGroup nb2 = new NavBarGroup("数据源");
-            //List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetAllSJYPZ();
-            //foreach (Model.T_BASE_SJYPZModel mm in sjys)
-            //{
-            //    NavBarItem ni = new NavBarItem(mm.PZMC);
-            //    NavBarItemTag nbt = new NavBarItemTag(mm.PZMC, "Elane.Jgzb.DPS.V2.ManageSystem.DataSource.FormMain", "Elane.Jgzb.DPS.V2.ManageSystem.DataSource.dll", mm.PZBM);
-            //    ni.Tag = nbt;
-            //    ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
-            //    navBarControl1.Items.Add(ni);
-            //    NavBarItemLink nil = new NavBarItemLink(ni);
-            //    nb2.ItemLinks.Add(nil);
-            //}
-            //nb2.Expanded = true;
-            //navBarControl1.Groups.Add(nb2);
+            NavBarGroup nb2 = new NavBarGroup("数据源");
+            List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetAllSJYPZ();
+            foreach (Model.T_BASE_SJYPZModel mm in sjys)
+            {
+                NavBarItem ni = new NavBarItem(mm.PZMC);
+                NavBarItemTag nbt = new NavBarItemTag(mm.PZMC, "Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource.FormMain", "Careysoft.Dotnet.Tools.SqlData.ManageClient.exe", mm.PZBM);
+                ni.Tag = nbt;
+                ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
+                navBarControl1.Items.Add(ni);
+                NavBarItemLink nil = new NavBarItemLink(ni);
+                nb2.ItemLinks.Add(nil);
+            }
+            nb2.Expanded = true;
+            navBarControl1.Groups.Add(nb2);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -170,10 +170,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            //FormAddDataSource f = new FormAddDataSource();
-            //if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-            //    LoadNav();
-            //}
+            FormAddDataSource f = new FormAddDataSource();
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                LoadNav();
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
