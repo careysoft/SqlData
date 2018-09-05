@@ -174,5 +174,14 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
                 XtraMessageBox.Show("连接失败");
             }
         }
+
+        private void btn_del_Click(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show("是否要删除该数据源?", "信息提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+                if (Access.DataSource.SJYPDel(m_Memo)) {
+                    SetMessageToFormain(this, e);
+                }
+            }
+        }
     }
 }

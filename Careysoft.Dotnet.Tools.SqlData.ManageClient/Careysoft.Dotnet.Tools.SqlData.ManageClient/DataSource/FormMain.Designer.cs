@@ -45,6 +45,7 @@
             this.btn_connect = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.txt_sjylx = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.btn_del = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.txt_sid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_port.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_pass.Properties)).BeginInit();
@@ -197,11 +198,21 @@
             this.txt_sjylx.Size = new System.Drawing.Size(151, 21);
             this.txt_sjylx.TabIndex = 22;
             // 
+            // btn_del
+            // 
+            this.btn_del.Location = new System.Drawing.Point(102, 160);
+            this.btn_del.Name = "btn_del";
+            this.btn_del.Size = new System.Drawing.Size(151, 23);
+            this.btn_del.TabIndex = 23;
+            this.btn_del.Text = "删除";
+            this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 359);
+            this.Controls.Add(this.btn_del);
             this.Controls.Add(this.txt_sjylx);
             this.Controls.Add(this.labelControl7);
             this.Controls.Add(this.btn_connect);
@@ -252,5 +263,6 @@
         private DevExpress.XtraEditors.LabelControl btn_connect;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.ComboBoxEdit txt_sjylx;
+        private DevExpress.XtraEditors.SimpleButton btn_del;
     }
 }

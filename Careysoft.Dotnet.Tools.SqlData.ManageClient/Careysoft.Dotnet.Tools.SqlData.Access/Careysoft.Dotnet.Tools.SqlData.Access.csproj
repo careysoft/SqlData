@@ -45,10 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access\FactoryT_BASE_SJYPZAccess.cs" />
+    <Compile Include="Access\FactoryT_BASE_UNITTYPEAccess.cs" />
     <Compile Include="Access\IT_BASE_SJYPZAccess.cs" />
+    <Compile Include="Access\IT_BASE_UNITTYPEAccess.cs" />
+    <Compile Include="Access\Oracle\T_BASE_PUBLIC.cs" />
     <Compile Include="Access\Oracle\T_BASE_SJYPZAccess.cs" />
+    <Compile Include="Access\Oracle\T_BASE_UNITTYPEAccess.cs" />
     <Compile Include="DataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.Model\Careysoft.Dotnet.Tools.SqlData.Model.csproj">

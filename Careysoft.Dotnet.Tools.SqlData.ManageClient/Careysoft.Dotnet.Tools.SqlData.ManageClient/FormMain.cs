@@ -31,6 +31,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 
         private int m_ConnectDBFailTime = 0;
 
+        private DevExpress.XtraNavBar.ViewInfo.NavBarHintInfo m_MouseMovingControlObject = null; //鼠标正在哪个控件
+
+        private DevExpress.XtraNavBar.ViewInfo.NavBarHintInfo m_MouseSelectControlObject = null;
+
         public FormMain()
         {
             InitializeComponent();
@@ -52,33 +56,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             //    }
             //    m_ConnectDBFailTime = 0;
             //}
-            //List<Model.T_BASE_UNITModel> units = Access.Unit.GetAllUnitModel();
-            //foreach (Model.T_BASE_UNITTYPEModel m in unittypes)
-            //{
-            //    NavBarGroup nb = new NavBarGroup(m.LXMC);
-            //    List<Model.T_BASE_UNITModel> ulist = units.FindAll(delegate(Model.T_BASE_UNITModel mm) { return mm.UNITTYPE == m.LXBM; });
-            //    foreach (Model.T_BASE_UNITModel mm in ulist)
-            //    {
-            //        NavBarItem ni = new NavBarItem(mm.UNITNAME);
-            //        NavBarItemTag nbt = new NavBarItemTag(mm.UNITNAME, "Elane.Jgzb.DPS.V2.ManageSystem.Unit.FormMain", "Elane.Jgzb.DPS.V2.ManageSystem.Unit.dll", mm.ID);
-            //        ni.Tag = nbt;
-            //        ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
-            //        navBarControl1.Items.Add(ni);
-            //        NavBarItemLink nil = new NavBarItemLink(ni);
-            //        if (mm.SFSC == 1)
-            //        {
-            //            nil.Item.Appearance.ForeColor = Color.DarkGray;
-            //        }
-            //        if (mm.UNITNAME.IndexOf("(") > 0)
-            //        {
-            //            nil.Item.Appearance.ForeColor = Color.FromArgb(255, 128, 128);
-            //        }
-            //        nb.ItemLinks.Add(nil);
-            //    }
-            //    nb.Expanded = true;
-            //    navBarControl1.Groups.Add(nb);
-            //}
-
+            
             NavBarGroup nb2 = new NavBarGroup("数据源");
             List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetAllSJYPZ();
             foreach (Model.T_BASE_SJYPZModel mm in sjys)
@@ -93,6 +71,34 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             }
             nb2.Expanded = true;
             navBarControl1.Groups.Add(nb2);
+
+            List<Model.T_BASE_UNITTYPEModel> unittypes = Access.UnitType.GetUnitTypeList();
+            foreach (Model.T_BASE_UNITTYPEModel m in unittypes)
+            {
+                NavBarGroup nb = new NavBarGroup(m.LXMC);
+                nb.Tag = m.LXBM;
+            //    //    List<Model.T_BASE_UNITModel> ulist = units.FindAll(delegate(Model.T_BASE_UNITModel mm) { return mm.UNITTYPE == m.LXBM; });
+            //    //    foreach (Model.T_BASE_UNITModel mm in ulist)
+            //    //    {
+            //    //        NavBarItem ni = new NavBarItem(mm.UNITNAME);
+            //    //        NavBarItemTag nbt = new NavBarItemTag(mm.UNITNAME, "Elane.Jgzb.DPS.V2.ManageSystem.Unit.FormMain", "Elane.Jgzb.DPS.V2.ManageSystem.Unit.dll", mm.ID);
+            //    //        ni.Tag = nbt;
+            //    //        ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
+            //    //        navBarControl1.Items.Add(ni);
+            //    //        NavBarItemLink nil = new NavBarItemLink(ni);
+            //    //        if (mm.SFSC == 1)
+            //    //        {
+            //    //            nil.Item.Appearance.ForeColor = Color.DarkGray;
+            //    //        }
+            //    //        if (mm.UNITNAME.IndexOf("(") > 0)
+            //    //        {
+            //    //            nil.Item.Appearance.ForeColor = Color.FromArgb(255, 128, 128);
+            //    //        }
+            //    //        nb.ItemLinks.Add(nil);
+            //    //    }
+                nb.Expanded = true;
+                navBarControl1.Groups.Add(nb);
+            }
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -161,6 +167,14 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         private void f_EventSendMessageToFormMain(object sender, EventArgs e)
         {
             LoadNav();
+            string formTag = (sender as CareySoft.FormObject.FObject).Tag.ToString();
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f.Tag.ToString() == formTag)
+                {
+                    f.Close();
+                }
+            }
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -179,10 +193,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //FormAddUnit f = new FormAddUnit();
-            //if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-            //    LoadNav();
-            //}
+            FormAddUnitType f = new FormAddUnitType();
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                LoadNav();
+            }
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -202,6 +217,65 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         private void timer1_Tick(object sender, EventArgs e)
         {
             LoadNav();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            toolStripMenuItem1.Enabled = false;
+            toolStripMenuItem1_1.Enabled = false;
+            toolStripMenuItem1_2.Enabled = false;
+            toolStripMenuItem1_3.Enabled = false; 
+            toolStripMenuItem2.Enabled = false;
+            toolStripMenuItem4.Enabled = false;
+            m_MouseSelectControlObject = m_MouseMovingControlObject;
+            if (m_MouseMovingControlObject == null) {
+                toolStripMenuItem1.Enabled = true;
+                toolStripMenuItem1_1.Enabled = true;
+            }
+            else if (m_MouseMovingControlObject.ObjectType.ToString().ToUpper() == "GROUP") {
+                DevExpress.XtraNavBar.NavBarGroup group = m_MouseMovingControlObject.HintObject as DevExpress.XtraNavBar.NavBarGroup;
+                if (group.Caption == "数据源")
+                {
+                    toolStripMenuItem2.Enabled = true;
+                }
+                else {
+                    toolStripMenuItem4.Enabled = true;
+                    toolStripMenuItem1.Enabled = true;
+                    toolStripMenuItem1_2.Enabled = true;
+                    toolStripMenuItem1_3.Enabled = true; 
+                }
+            }
+        }
+
+        private void navBarControl1_GetHint(object sender, NavBarGetHintEventArgs e)
+        {
+            m_MouseMovingControlObject = e.HintInfo;
+        }
+
+        private void navBarControl1_MouseLeave(object sender, EventArgs e)
+        {
+            m_MouseMovingControlObject = null;
+        }
+
+        private void toolStripMenuItem1_3_Click(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show("你确定要删除该分组", "信息提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+                DevExpress.XtraNavBar.NavBarGroup group = m_MouseSelectControlObject.HintObject as DevExpress.XtraNavBar.NavBarGroup;
+                string id = group.Tag.ToString();
+                if (Access.UnitType.UnitTypeDel(id)) {
+                    LoadNav();
+                }
+            }
+        }
+
+        private void toolStripMenuItem1_2_Click(object sender, EventArgs e)
+        {
+            DevExpress.XtraNavBar.NavBarGroup group = m_MouseSelectControlObject.HintObject as DevExpress.XtraNavBar.NavBarGroup;
+            string id = group.Tag.ToString();
+            FormAddUnitType f = new FormAddUnitType(id);
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                LoadNav();
+            }
         }
     }
 }

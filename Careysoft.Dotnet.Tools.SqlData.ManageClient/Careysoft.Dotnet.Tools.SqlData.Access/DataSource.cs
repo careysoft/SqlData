@@ -37,6 +37,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             return ret > 0;
         }
 
+        public static bool SJYPDel(string bm) {
+            Model.T_BASE_SJYPZModel model = GetSJYPZFromBM(bm);
+            model.SFSC = 1;
+            return SJYPZEdit(model);
+        }
+
         public static bool SJYConnected(string ip, string port, string sid, string uid, string pass)
         {
             string m_ConnectStringModel = "DATA SOURCE =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1})) (CONNECT_DATA=(SID={2})));USER ID={3};PASSWORD ={4}";
