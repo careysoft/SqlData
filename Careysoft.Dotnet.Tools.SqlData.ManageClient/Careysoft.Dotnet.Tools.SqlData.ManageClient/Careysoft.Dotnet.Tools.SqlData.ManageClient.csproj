@@ -112,6 +112,12 @@
     <Compile Include="FormSelectSJY.Designer.cs">
       <DependentUpon>FormSelectSJY.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSetParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSetParameter.Designer.cs">
+      <DependentUpon>FormSetParameter.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DataSource\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelectSJY.resx">
       <DependentUpon>FormSelectSJY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSetParameter.resx">
+      <DependentUpon>FormSetParameter.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

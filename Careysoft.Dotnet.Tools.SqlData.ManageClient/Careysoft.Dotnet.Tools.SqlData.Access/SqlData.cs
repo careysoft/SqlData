@@ -24,10 +24,13 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             }
             string[] sqlArray = sql.Split(';');
             for (int i = 0; i < sqlArray.Length; i++) {
-                DataSet ds = af.Query(sqlArray[i]);
-                if (ds != null && ds.Tables.Count > 0)
+                if (!String.IsNullOrEmpty(sqlArray[i]))
                 {
-                    models.Add(ds.Tables[0]);
+                    DataSet ds = af.Query(sqlArray[i]);
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        models.Add(ds.Tables[0]);
+                    }
                 }
             }
             return models;

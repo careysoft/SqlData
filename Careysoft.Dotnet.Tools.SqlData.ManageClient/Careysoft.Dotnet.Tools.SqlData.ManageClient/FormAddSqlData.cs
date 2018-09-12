@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Text.RegularExpressions;
 
 namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
@@ -127,8 +128,37 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 txt_SQL.Focus();
                 return;
             }
-            string errorInfo = "";
-            List<DataTable> models = Access.SqlData.GetDataSet((txt_SJYID.Tag as Model.T_BASE_SJYPZModel), txt_SQL.Text, ref errorInfo);
+            string sql = txt_SQL.Text.ToUpper();
+            Regex re = new Regex(@"&\w*");
+            MatchCollection matchs = re.Matches(sql);
+            string parameters = "";
+            for (int i = 0; i < matchs.Count; i++) {
+                parameters += ";"+matchs[i].Value;
+            }
+            if (!String.IsNullOrEmpty(parameters)) {
+                parameters = parameters.Substring(1);
+                FormSetParameter f = new FormSetParameter(parameters);
+                if (f.ShowDialog() != System.Windows.Forms.DialogResult.OK) {
+                    return;
+                }
+                List<Model.T_D_SQLDATA_SLVModel> models = f.SqlParameters;
+                foreach (Model.T_D_SQLDATA_SLVModel model in models) {
+                    sql = sql.Replace("&" + model.PARAMETERANME, model.DEFAULTVALUE);
+                }
+            }
+            xtraTabControl1.TabPages.Clear();
+            if (txt_SQLTYPE.SelectedIndex == 0)
+            {
+                string errorInfo = "";
+                List<DataTable> models = Access.SqlData.GetDataSet((txt_SJYID.Tag as Model.T_BASE_SJYPZModel), sql, ref errorInfo);
+                foreach (DataTable dt in models) {
+                    DevExpress.XtraTab.XtraTabPage xTab = xtraTabControl1.TabPages.Add();
+                    xTab.Text = " 查询结果 ";
+                    DataSource.UserControlTableGrid uTabGrid = new DataSource.UserControlTableGrid(dt);
+                    uTabGrid.Dock = DockStyle.Fill;
+                    xTab.Controls.Add(uTabGrid);
+                }
+            }
         }
 
         private void txt_SJYID_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
