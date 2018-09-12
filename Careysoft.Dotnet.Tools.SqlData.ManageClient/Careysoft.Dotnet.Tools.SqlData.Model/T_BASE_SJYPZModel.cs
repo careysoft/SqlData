@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Careysoft.Dotnet.Tools.SqlData.Model
 {
-    public class T_BASE_SJYPZModel
+    public class T_BASE_SJYPZModel : Careysoft.Basic.Public.TableBaseModel
     {
         public T_BASE_SJYPZModel() { }
         public T_BASE_SJYPZModel(string _pzbm,

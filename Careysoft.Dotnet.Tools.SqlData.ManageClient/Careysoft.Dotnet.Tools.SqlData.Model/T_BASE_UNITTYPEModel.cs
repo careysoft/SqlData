@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Careysoft.Dotnet.Tools.SqlData.Model
+namespace Careysoft.Dotnet.Tools.SqlData.Model 
 {
-    public class T_BASE_UNITTYPEModel
+    public class T_BASE_UNITTYPEModel : Careysoft.Basic.Public.TableBaseModel
     {
         public T_BASE_UNITTYPEModel() { }
         public T_BASE_UNITTYPEModel(string _lxbm,

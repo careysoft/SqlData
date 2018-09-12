@@ -167,12 +167,15 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         private void f_EventSendMessageToFormMain(object sender, EventArgs e)
         {
             LoadNav();
-            string formTag = (sender as CareySoft.FormObject.FObject).Tag.ToString();
-            foreach (Form f in this.MdiChildren)
+            if (sender != null)
             {
-                if (f.Tag.ToString() == formTag)
+                string formTag = (sender as CareySoft.FormObject.FObject).Tag.ToString();
+                foreach (Form f in this.MdiChildren)
                 {
-                    f.Close();
+                    if (f.Tag.ToString() == formTag)
+                    {
+                        f.Close();
+                    }
                 }
             }
         }
@@ -273,6 +276,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             DevExpress.XtraNavBar.NavBarGroup group = m_MouseSelectControlObject.HintObject as DevExpress.XtraNavBar.NavBarGroup;
             string id = group.Tag.ToString();
             FormAddUnitType f = new FormAddUnitType(id);
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                LoadNav();
+            }
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            DevExpress.XtraNavBar.NavBarGroup group = m_MouseSelectControlObject.HintObject as DevExpress.XtraNavBar.NavBarGroup;
+            string id = group.Tag.ToString();
+            FormAddSqlData f = new FormAddSqlData(id);
             if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 LoadNav();
             }

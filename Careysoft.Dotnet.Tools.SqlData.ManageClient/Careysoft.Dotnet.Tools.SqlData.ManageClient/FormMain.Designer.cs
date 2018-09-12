@@ -203,20 +203,20 @@
             // toolStripMenuItem1_1
             // 
             this.toolStripMenuItem1_1.Name = "toolStripMenuItem1_1";
-            this.toolStripMenuItem1_1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1_1.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem1_1.Text = "新增分组(&A)";
             // 
             // toolStripMenuItem1_2
             // 
             this.toolStripMenuItem1_2.Name = "toolStripMenuItem1_2";
-            this.toolStripMenuItem1_2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1_2.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem1_2.Text = "编辑分组(&E)";
             this.toolStripMenuItem1_2.Click += new System.EventHandler(this.toolStripMenuItem1_2_Click);
             // 
             // toolStripMenuItem1_3
             // 
             this.toolStripMenuItem1_3.Name = "toolStripMenuItem1_3";
-            this.toolStripMenuItem1_3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1_3.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem1_3.Text = "删除分组(&D)";
             this.toolStripMenuItem1_3.Click += new System.EventHandler(this.toolStripMenuItem1_3_Click);
             // 
@@ -225,6 +225,7 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(162, 22);
             this.toolStripMenuItem4.Text = "新增SqlData(&D)";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator1
             // 

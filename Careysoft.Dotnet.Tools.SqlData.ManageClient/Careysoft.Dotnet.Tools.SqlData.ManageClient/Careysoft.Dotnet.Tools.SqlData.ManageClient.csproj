@@ -35,13 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Careysoft.Basic.Public">
+    <Reference Include="Careysoft.Basic.Public, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Basic.Public\bin\Debug\Careysoft.Basic.Public.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FormObject">
       <HintPath>..\..\..\..\..\99公共模块\FormObject\bin\Debug\FormObject.dll</HintPath>
@@ -63,6 +67,12 @@
     </Compile>
     <Compile Include="DataSource\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSource\UserControlTableGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataSource\UserControlTableGrid.Designer.cs">
+      <DependentUpon>UserControlTableGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAddDataSource.cs">
       <SubType>Form</SubType>
@@ -90,8 +100,23 @@
     <Compile Include="FormAddUnitType.Designer.cs">
       <DependentUpon>FormAddUnitType.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAddSqlData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddSqlData.Designer.cs">
+      <DependentUpon>FormAddSqlData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectSJY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectSJY.Designer.cs">
+      <DependentUpon>FormSelectSJY.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DataSource\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSource\UserControlTableGrid.resx">
+      <DependentUpon>UserControlTableGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddDataSource.resx">
       <DependentUpon>FormAddDataSource.cs</DependentUpon>
@@ -115,6 +140,12 @@
     </Compile>
     <EmbeddedResource Include="FormAddUnitType.resx">
       <DependentUpon>FormAddUnitType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddSqlData.resx">
+      <DependentUpon>FormAddSqlData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectSJY.resx">
+      <DependentUpon>FormSelectSJY.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

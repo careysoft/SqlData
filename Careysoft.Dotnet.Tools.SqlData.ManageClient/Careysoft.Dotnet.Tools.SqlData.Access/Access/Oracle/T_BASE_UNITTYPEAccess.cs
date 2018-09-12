@@ -110,14 +110,24 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("SFSC,");
             sBuilder.Append("BL1,");
             sBuilder.Append("BL2,");
-            sBuilder.Append("BL3");
+            sBuilder.Append("BL3,");
+            sBuilder.Append("CJR,");
+            sBuilder.Append("CJSJ,");
+            sBuilder.Append("XGR,");
+            sBuilder.Append("XGSJ,");
+            sBuilder.Append("SJC");
             sBuilder.Append(") VALUES(");
             sBuilder.Append(":LXBM,");
             sBuilder.Append(":LXMC,");
             sBuilder.Append(":SFSC,");
             sBuilder.Append(":BL1,");
             sBuilder.Append(":BL2,");
-            sBuilder.Append(":BL3");
+            sBuilder.Append(":BL3,");
+            sBuilder.Append(":CJR,");
+            sBuilder.Append(":CJSJ,");
+            sBuilder.Append(":XGR,");
+            sBuilder.Append(":XGSJ,");
+            sBuilder.Append(":SJC");
             sBuilder.Append(")");
             OracleParameter[] oparams ={
              new OracleParameter(":LXBM",OracleType.VarChar),
@@ -125,16 +135,26 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
              new OracleParameter(":SFSC",OracleType.Number),
              new OracleParameter(":BL1",OracleType.VarChar),
              new OracleParameter(":BL2",OracleType.VarChar),
-             new OracleParameter(":BL3",OracleType.VarChar)
+             new OracleParameter(":BL3",OracleType.VarChar),
+             new OracleParameter(":CJR",OracleType.VarChar),
+             new OracleParameter(":CJSJ",OracleType.VarChar),
+             new OracleParameter(":XGR",OracleType.VarChar),
+             new OracleParameter(":XGSJ",OracleType.VarChar),
+             new OracleParameter(":SJC",OracleType.VarChar)
            };
             XMLDbHelper.FactoryDbHelper af = new XMLDbHelper.FactoryDbHelper();
+            DateTime sjc = af.GetDbDatetimestamp();
             oparams[0].Value = af.GetID(T_BASE_PUBLIC.UNITNAMEKEY, "T_BASE_UNITTYPE");//model.LXBM;
             oparams[1].Value = model.LXMC;
             oparams[2].Value = model.SFSC;
             oparams[3].Value = model.BL1;
             oparams[4].Value = model.BL2;
             oparams[5].Value = model.BL3;
-            
+            oparams[6].Value = model.CJR;
+            oparams[7].Value = sjc.ToString("yyyyMMddHHmmss");// model.CJSJ;
+            oparams[8].Value = model.XGR;
+            oparams[9].Value = model.XGSJ;
+            oparams[10].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC;
             int ret = af.ExecuteNonQuery(sBuilder.ToString(), oparams);
             return ret;
         }
@@ -146,13 +166,20 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
         /// <returns></returns>
         public int Modify(T_BASE_UNITTYPEModel model)
         {
+            XMLDbHelper.FactoryDbHelper af = new XMLDbHelper.FactoryDbHelper();
+            DateTime sjc = af.GetDbDatetimestamp();
             StringBuilder sBuilder = new StringBuilder();
             sBuilder.Append("UPDATE T_BASE_UNITTYPE SET ");
             sBuilder.Append("LXMC=:LXMC,");
             sBuilder.Append("SFSC=:SFSC,");
             sBuilder.Append("BL1=:BL1,");
             sBuilder.Append("BL2=:BL2,");
-            sBuilder.Append("BL3=:BL3 ");
+            sBuilder.Append("BL3=:BL3,");
+            sBuilder.Append("CJR=:CJR,");
+            sBuilder.Append("CJSJ=:CJSJ,");
+            sBuilder.Append("XGR=:XGR,");
+            sBuilder.Append("XGSJ=:XGSJ,");
+            sBuilder.Append("SJC=:SJC ");
             sBuilder.Append("WHERE LXBM=:LXBM ");
             OracleParameter[] oparams ={
              new OracleParameter(":LXBM",OracleType.VarChar),
@@ -160,7 +187,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
              new OracleParameter(":SFSC",OracleType.Number),
              new OracleParameter(":BL1",OracleType.VarChar),
              new OracleParameter(":BL2",OracleType.VarChar),
-             new OracleParameter(":BL3",OracleType.VarChar)
+             new OracleParameter(":BL3",OracleType.VarChar),
+             new OracleParameter(":CJR",OracleType.VarChar),
+             new OracleParameter(":CJSJ",OracleType.VarChar),
+             new OracleParameter(":XGR",OracleType.VarChar),
+             new OracleParameter(":XGSJ",OracleType.VarChar),
+             new OracleParameter(":SJC",OracleType.VarChar)
            };
             oparams[0].Value = model.LXBM;
             oparams[1].Value = model.LXMC;
@@ -168,7 +200,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             oparams[3].Value = model.BL1;
             oparams[4].Value = model.BL2;
             oparams[5].Value = model.BL3;
-            XMLDbHelper.FactoryDbHelper af = new XMLDbHelper.FactoryDbHelper();
+            oparams[6].Value = model.CJR;
+            oparams[7].Value = model.CJSJ;
+            oparams[8].Value = model.XGR;
+            oparams[9].Value = sjc.ToString("yyyyMMddHHmmss");//model.XGSJ;
+            oparams[10].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC
             int ret = af.ExecuteNonQuery(sBuilder.ToString(), oparams);
             return ret;
         }
@@ -207,8 +243,13 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("T.SFSC,");
             sBuilder.Append("T.BL1,");
             sBuilder.Append("T.BL2,");
-            sBuilder.Append("T.BL3 ");
-            sBuilder.Append("FROM T_BASE_UNITTYPE  T ");
+            sBuilder.Append("T.BL3,");
+            sBuilder.Append("T.CJR,");
+            sBuilder.Append("T.CJSJ,");
+            sBuilder.Append("T.XGR,");
+            sBuilder.Append("T.XGSJ,");
+            sBuilder.Append("T.SJC ");
+            sBuilder.Append("FROM T_BASE_UNITTYPE T ");
             sBuilder.Append("WHERE T.LXBM=:LXBM ");
             OracleParameter[] oparams ={
              new OracleParameter(":LXBM",OracleType.VarChar)
@@ -225,6 +266,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                 model.BL1 = ToString(dr["BL1"]);
                 model.BL2 = ToString(dr["BL2"]);
                 model.BL3 = ToString(dr["BL3"]);
+                model.CJR = ToString(dr["CJR"]);
+                model.CJSJ = ToString(dr["CJSJ"]);
+                model.XGR = ToString(dr["XGR"]);
+                model.XGSJ = ToString(dr["XGSJ"]);
+                model.SJC = ToString(dr["SJC"]);
             }
             return model;
         }
@@ -244,8 +290,13 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("T.SFSC,");
             sBuilder.Append("T.BL1,");
             sBuilder.Append("T.BL2,");
-            sBuilder.Append("T.BL3 ");
-            sBuilder.Append("FROM T_BASE_UNITTYPE  T ");
+            sBuilder.Append("T.BL3,");
+            sBuilder.Append("T.CJR,");
+            sBuilder.Append("T.CJSJ,");
+            sBuilder.Append("T.XGR,");
+            sBuilder.Append("T.XGSJ,");
+            sBuilder.Append("T.SJC ");
+            sBuilder.Append("FROM T_BASE_UNITTYPE T ");
             if (!String.IsNullOrEmpty(swhere))
             {
                 sBuilder.Append(String.Format("WHERE {0} ", swhere));
@@ -267,6 +318,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                     model.BL1 = ToString(dr["BL1"]);
                     model.BL2 = ToString(dr["BL2"]);
                     model.BL3 = ToString(dr["BL3"]);
+                    model.CJR = ToString(dr["CJR"]);
+                    model.CJSJ = ToString(dr["CJSJ"]);
+                    model.XGR = ToString(dr["XGR"]);
+                    model.XGSJ = ToString(dr["XGSJ"]);
+                    model.SJC = ToString(dr["SJC"]);
                     models.Add(model);
                 }
             }
