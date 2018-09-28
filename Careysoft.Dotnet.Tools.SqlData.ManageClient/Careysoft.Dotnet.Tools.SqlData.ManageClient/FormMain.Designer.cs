@@ -44,6 +44,7 @@
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1_2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -174,12 +175,13 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
+            this.toolStripMenuItem5,
             this.toolStripMenuItem1,
             this.toolStripMenuItem4,
             this.toolStripSeparator1,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 142);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // toolStripMenuItem2
@@ -189,6 +191,13 @@
             this.toolStripMenuItem2.Text = "新增数据源(&D)";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem5.Text = "新增任务(&T)";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -197,7 +206,7 @@
             this.toolStripMenuItem1_3});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
-            this.toolStripMenuItem1.Text = "分组管理(&U)";
+            this.toolStripMenuItem1.Text = "Sql分组管理(&U)";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem1_1
@@ -304,6 +313,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
 
     }
 }

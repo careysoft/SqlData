@@ -5,26 +5,20 @@ using System.Text;
 
 namespace Careysoft.Dotnet.Tools.SqlData.Model
 {
-    public class T_D_SQLDATA_SLVModel
+    public class T_S_TASK_SLV_SLVModel
     {
-        public T_D_SQLDATA_SLVModel() { }
-        public T_D_SQLDATA_SLVModel(string _id,
-                           string _mstid,
-                           string _PARAMETERNAME,
-                           string _parametertype,
-                           string _parameterdisc,
-                           string _defaultvalue,
+        public T_S_TASK_SLV_SLVModel() { }
+        public T_S_TASK_SLV_SLVModel(string _id,
+                           string _sqldataslvid,
+                           string _sqldataslvval,
                            string _bl1,
                            string _bl2,
                            string _bl3,
                            string _sjc)
         {
             m_ID = _id;
-            m_MSTID = _mstid;
-            m_PARAMETERNAME = _PARAMETERNAME;
-            m_PARAMETERTYPE = _parametertype;
-            m_PARAMETERDISC = _parameterdisc;
-            m_DEFAULTVALUE = _defaultvalue;
+            m_SQLDATASLVID = _sqldataslvid;
+            m_SQLDATASLVVAL = _sqldataslvval;
             m_BL1 = _bl1;
             m_BL2 = _bl2;
             m_BL3 = _bl3;
@@ -45,79 +39,80 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
                 m_ID = value;
             }
         }
-        private string m_MSTID;
+        private string m_TASKSLVID;
         ///<summary>
-        ///主ID
+        ///taskSLV ID
         ///</summary>
-        public string MSTID
+        public string TASKSLVID
         {
             get
             {
-                return m_MSTID;
+                return m_TASKSLVID;
             }
             set
             {
-                m_MSTID = value;
+                m_TASKSLVID = value;
             }
         }
-        private string m_PARAMETERNAME;
+        
+        private string m_SQLDATASLVID;
+        ///<summary>
+        ///对应参数ID
+        ///</summary>
+        public string SQLDATASLVID
+        {
+            get
+            {
+                return m_SQLDATASLVID;
+            }
+            set
+            {
+                m_SQLDATASLVID = value;
+            }
+        }
+        private string m_SQLDARASLVNAME;
         ///<summary>
         ///参数名
         ///</summary>
-        public string PARAMETERNAME
+        public string SQLDARASLVNAME
         {
             get
             {
-                return m_PARAMETERNAME;
+                return m_SQLDARASLVNAME;
             }
             set
             {
-                m_PARAMETERNAME = value;
+                m_SQLDARASLVNAME = value;
             }
         }
-        private string m_PARAMETERTYPE;
+        private string m_SQLDARASQLTYPE;
         ///<summary>
         ///参数类型
         ///</summary>
-        public string PARAMETERTYPE
+        public string SQLDARASQLTYPE
         {
             get
             {
-                return m_PARAMETERTYPE;
+                return m_SQLDARASQLTYPE;
             }
             set
             {
-                m_PARAMETERTYPE = value;
+                m_SQLDARASQLTYPE = value;
             }
         }
-        private string m_PARAMETERDISC;
+        private string m_SQLDATASLVVAL;
         ///<summary>
-        ///参数说明
+        ///对应参数值
         ///</summary>
-        public string PARAMETERDISC
+        public string SQLDATASLVVAL
         {
             get
             {
-                return m_PARAMETERDISC;
+                return m_SQLDATASLVVAL;
             }
             set
             {
-                m_PARAMETERDISC = value;
-            }
-        }
-        private string m_DEFAULTVALUE;
-        ///<summary>
-        ///默认值
-        ///</summary>
-        public string DEFAULTVALUE
-        {
-            get
-            {
-                return m_DEFAULTVALUE;
-            }
-            set
-            {
-                m_DEFAULTVALUE = value;
+                m_SQLDATASLVVAL = value;
             }
         }
         private string m_BL1;
@@ -179,15 +174,6 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
             {
                 m_SJC = value;
             }
-        }
-
-        private int m_SFSC;
-        /// <summary>
-        /// 是否删除
-        /// </summary>
-        public int SFSC {
-            get { return m_SFSC; }
-            set { m_SFSC = value; }
         }
     }
 }

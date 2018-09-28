@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
-namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
+namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
 {
     public partial class UserControlTableGrid : DevExpress.XtraEditors.XtraUserControl
     {

@@ -37,6 +37,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
                 m_SJYID = value;
             }
         }
+
+        /// <summary>
+        /// 数据源名称
+        /// </summary>
+        public string SJYMC { get; set; }
+
         private string m_SQLDATANAME;
         ///<summary>
         ///名称
@@ -139,10 +145,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
             set { m_UNITTYPEID = value; }
         }
 
+        public string UNITTYPENAME { get; set; }
+
         private List<T_D_SQLDATA_SLVModel> m_SLVList = new List<T_D_SQLDATA_SLVModel>();
         public List<T_D_SQLDATA_SLVModel> SLVList {
             get { return m_SLVList; }
-            set { SLVList = value; }
+            set { m_SLVList = value; }
         }
     }
 }

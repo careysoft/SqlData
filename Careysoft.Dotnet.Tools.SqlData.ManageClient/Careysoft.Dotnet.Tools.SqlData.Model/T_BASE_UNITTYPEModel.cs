@@ -7,6 +7,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
 {
     public class T_BASE_UNITTYPEModel : Careysoft.Basic.Public.TableBaseModel
     {
+        public override string ToString()
+        {
+            return m_LXMC;
+        }
         public T_BASE_UNITTYPEModel() { }
         public T_BASE_UNITTYPEModel(string _lxbm,
                            string _lxmc,

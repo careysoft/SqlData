@@ -175,7 +175,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                sBuilder.Append("INSERT INTO T_D_SQLDATA_SLV(");
                sBuilder.Append("ID,");
                sBuilder.Append("MSTID,");
-               sBuilder.Append("PARAMETERANME,");
+               sBuilder.Append("PARAMETERNAME,");
                sBuilder.Append("PARAMETERTYPE,");
                sBuilder.Append("PARAMETERDISC,");
                sBuilder.Append("DEFAULTVALUE,");
@@ -186,7 +186,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                sBuilder.Append(") VALUES(");
                sBuilder.Append(":ID,");
                sBuilder.Append(":MSTID,");
-               sBuilder.Append(":PARAMETERANME,");
+               sBuilder.Append(":PARAMETERNAME,");
                sBuilder.Append(":PARAMETERTYPE,");
                sBuilder.Append(":PARAMETERDISC,");
                sBuilder.Append(":DEFAULTVALUE,");
@@ -198,7 +198,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                OracleParameter[] oparams1 ={
                  new OracleParameter(":ID",OracleType.VarChar),
                  new OracleParameter(":MSTID",OracleType.VarChar),
-                 new OracleParameter(":PARAMETERANME",OracleType.VarChar),
+                 new OracleParameter(":PARAMETERNAME",OracleType.VarChar),
                  new OracleParameter(":PARAMETERTYPE",OracleType.VarChar),
                  new OracleParameter(":PARAMETERDISC",OracleType.VarChar),
                  new OracleParameter(":DEFAULTVALUE",OracleType.VarChar),
@@ -209,7 +209,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                };
                oparams1[0].Value = af.GetID(T_BASE_PUBLIC.UNITNAMEKEY, "T_D_SQLDATA_MST");//model.ID;
                oparams1[1].Value = oparams[0].Value;//model.MSTID;
-               oparams1[2].Value = m.PARAMETERANME;//model.PARAMETERANME;
+               oparams1[2].Value = m.PARAMETERNAME;//model.PARAMETERNAME;
                oparams1[3].Value = m.PARAMETERTYPE;//model.PARAMETERTYPE;
                oparams1[4].Value = m.PARAMETERDISC;//model.PARAMETERDISC;
                oparams1[5].Value = m.DEFAULTVALUE;//model.DEFAULTVALUE;
@@ -230,7 +230,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
         /// <returns></returns>
         public int Modify(T_D_SQLDATA_MSTModel model)
         {
-            List<XMLDbHelper.Paramers> listParamters = new List<XMLDbHelper.Paramers>();
+           List<XMLDbHelper.Paramers> listParamters = new List<XMLDbHelper.Paramers>();
            XMLDbHelper.FactoryDbHelper af = new XMLDbHelper.FactoryDbHelper();
            DateTime sjc = af.GetDbDatetimestamp();
            StringBuilder sBuilder = new StringBuilder();
@@ -280,66 +280,110 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
            oparams[12].Value = model.SFJY;
            oparams[13].Value = model.UNITTYPEID; 
            listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams));
-           
-           sBuilder.Remove(0, sBuilder.Length);
-           sBuilder.Append("DELETE FROM T_D_SQLDATA_SLV WHERE MSTID=:MSTID");
-           OracleParameter[] oparams1 ={
-             new OracleParameter(":MSTID",OracleType.VarChar)
-           };
-           oparams1[0].Value = model.ID;
-           listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams1));
 
            foreach (T_D_SQLDATA_SLVModel m in model.SLVList)
            {
-               sBuilder.Remove(0, sBuilder.Length);
-               sBuilder.Append("INSERT INTO T_D_SQLDATA_SLV(");
-               sBuilder.Append("ID,");
-               sBuilder.Append("MSTID,");
-               sBuilder.Append("PARAMETERANME,");
-               sBuilder.Append("PARAMETERTYPE,");
-               sBuilder.Append("PARAMETERDISC,");
-               sBuilder.Append("DEFAULTVALUE,");
-               sBuilder.Append("BL1,");
-               sBuilder.Append("BL2,");
-               sBuilder.Append("BL3,");
-               sBuilder.Append("SJC");
-               sBuilder.Append(") VALUES(");
-               sBuilder.Append(":ID,");
-               sBuilder.Append(":MSTID,");
-               sBuilder.Append(":PARAMETERANME,");
-               sBuilder.Append(":PARAMETERTYPE,");
-               sBuilder.Append(":PARAMETERDISC,");
-               sBuilder.Append(":DEFAULTVALUE,");
-               sBuilder.Append(":BL1,");
-               sBuilder.Append(":BL2,");
-               sBuilder.Append(":BL3,");
-               sBuilder.Append(":SJC");
-               sBuilder.Append(")");
-               OracleParameter[] oparams2 ={
-                 new OracleParameter(":ID",OracleType.VarChar),
-                 new OracleParameter(":MSTID",OracleType.VarChar),
-                 new OracleParameter(":PARAMETERANME",OracleType.VarChar),
-                 new OracleParameter(":PARAMETERTYPE",OracleType.VarChar),
-                 new OracleParameter(":PARAMETERDISC",OracleType.VarChar),
-                 new OracleParameter(":DEFAULTVALUE",OracleType.VarChar),
-                 new OracleParameter(":BL1",OracleType.VarChar),
-                 new OracleParameter(":BL2",OracleType.VarChar),
-                 new OracleParameter(":BL3",OracleType.VarChar),
-                 new OracleParameter(":SJC",OracleType.VarChar)
-               };
-               oparams2[0].Value = af.GetID(T_BASE_PUBLIC.UNITNAMEKEY, "T_D_SQLDATA_MST");//model.ID;
-               oparams2[1].Value = oparams[0].Value;//model.MSTID;
-               oparams2[2].Value = m.PARAMETERANME;//model.PARAMETERANME;
-               oparams2[3].Value = m.PARAMETERTYPE;//model.PARAMETERTYPE;
-               oparams2[4].Value = m.PARAMETERDISC;//model.PARAMETERDISC;
-               oparams2[5].Value = m.DEFAULTVALUE;//model.DEFAULTVALUE;
-               oparams2[6].Value = m.BL1;//model.BL1;
-               oparams2[7].Value = m.BL2;//model.BL2;
-               oparams2[8].Value = m.BL3;//model.BL3;
-               oparams2[9].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC;
-               listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams2));
+               if (String.IsNullOrEmpty(m.ID))
+               {
+                   sBuilder.Remove(0, sBuilder.Length);
+                   sBuilder.Append("INSERT INTO T_D_SQLDATA_SLV(");
+                   sBuilder.Append("ID,");
+                   sBuilder.Append("MSTID,");
+                   sBuilder.Append("PARAMETERNAME,");
+                   sBuilder.Append("PARAMETERTYPE,");
+                   sBuilder.Append("PARAMETERDISC,");
+                   sBuilder.Append("DEFAULTVALUE,");
+                   sBuilder.Append("BL1,");
+                   sBuilder.Append("BL2,");
+                   sBuilder.Append("BL3,");
+                   sBuilder.Append("SJC");
+                   sBuilder.Append(") VALUES(");
+                   sBuilder.Append(":ID,");
+                   sBuilder.Append(":MSTID,");
+                   sBuilder.Append(":PARAMETERNAME,");
+                   sBuilder.Append(":PARAMETERTYPE,");
+                   sBuilder.Append(":PARAMETERDISC,");
+                   sBuilder.Append(":DEFAULTVALUE,");
+                   sBuilder.Append(":BL1,");
+                   sBuilder.Append(":BL2,");
+                   sBuilder.Append(":BL3,");
+                   sBuilder.Append(":SJC");
+                   sBuilder.Append(")");
+                   OracleParameter[] oparams1 ={
+                     new OracleParameter(":ID",OracleType.VarChar),
+                     new OracleParameter(":MSTID",OracleType.VarChar),
+                     new OracleParameter(":PARAMETERNAME",OracleType.VarChar),
+                     new OracleParameter(":PARAMETERTYPE",OracleType.VarChar),
+                     new OracleParameter(":PARAMETERDISC",OracleType.VarChar),
+                     new OracleParameter(":DEFAULTVALUE",OracleType.VarChar),
+                     new OracleParameter(":BL1",OracleType.VarChar),
+                     new OracleParameter(":BL2",OracleType.VarChar),
+                     new OracleParameter(":BL3",OracleType.VarChar),
+                     new OracleParameter(":SJC",OracleType.VarChar)
+                   };
+                   oparams1[0].Value = af.GetID(T_BASE_PUBLIC.UNITNAMEKEY, "T_D_SQLDATA_MST");//model.ID;
+                   oparams1[1].Value = oparams[0].Value;//model.MSTID;
+                   oparams1[2].Value = m.PARAMETERNAME;//model.PARAMETERNAME;
+                   oparams1[3].Value = m.PARAMETERTYPE;//model.PARAMETERTYPE;
+                   oparams1[4].Value = m.PARAMETERDISC;//model.PARAMETERDISC;
+                   oparams1[5].Value = m.DEFAULTVALUE;//model.DEFAULTVALUE;
+                   oparams1[6].Value = m.BL1;//model.BL1;
+                   oparams1[7].Value = m.BL2;//model.BL2;
+                   oparams1[8].Value = m.BL3;//model.BL3;
+                   oparams1[9].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC;
+                   listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams1));
+               }
+               else {
+                   if (m.SFSC == 1)
+                   {
+                       sBuilder.Remove(0, sBuilder.Length);
+                       sBuilder.Append("DELETE FROM T_D_SQLDATA_SLV WHERE ID=:ID");
+                       OracleParameter[] oparams2 ={
+                         new OracleParameter(":ID",OracleType.VarChar)
+                       };
+                       oparams2[0].Value = m.ID;
+                       listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams2));
+                   }
+                   else {
+                       sBuilder.Remove(0, sBuilder.Length);
+                       sBuilder.Append("UPDATE T_D_SQLDATA_SLV SET ");
+                       sBuilder.Append("MSTID=:MSTID,");
+                       sBuilder.Append("PARAMETERNAME=:PARAMETERNAME,");
+                       sBuilder.Append("PARAMETERTYPE=:PARAMETERTYPE,");
+                       sBuilder.Append("PARAMETERDISC=:PARAMETERDISC,");
+                       sBuilder.Append("DEFAULTVALUE=:DEFAULTVALUE,");
+                       sBuilder.Append("BL1=:BL1,");
+                       sBuilder.Append("BL2=:BL2,");
+                       sBuilder.Append("BL3=:BL3,");
+                       sBuilder.Append("SJC=:SJC ");
+                       sBuilder.Append("WHERE ID=:ID ");
+                       OracleParameter[] oparams3 ={
+                         new OracleParameter(":ID",OracleType.VarChar),
+                         new OracleParameter(":MSTID",OracleType.VarChar),
+                         new OracleParameter(":PARAMETERNAME",OracleType.VarChar),
+                         new OracleParameter(":PARAMETERTYPE",OracleType.VarChar),
+                         new OracleParameter(":PARAMETERDISC",OracleType.VarChar),
+                         new OracleParameter(":DEFAULTVALUE",OracleType.VarChar),
+                         new OracleParameter(":BL1",OracleType.VarChar),
+                         new OracleParameter(":BL2",OracleType.VarChar),
+                         new OracleParameter(":BL3",OracleType.VarChar),
+                         new OracleParameter(":SJC",OracleType.VarChar)
+                       };
+                       oparams3[0].Value = m.ID;
+                       oparams3[1].Value = m.MSTID;
+                       oparams3[2].Value = m.PARAMETERNAME;
+                       oparams3[3].Value = m.PARAMETERTYPE;
+                       oparams3[4].Value = m.PARAMETERDISC;
+                       oparams3[5].Value = m.DEFAULTVALUE;
+                       oparams3[6].Value = m.BL1;
+                       oparams3[7].Value = m.BL2;
+                       oparams3[8].Value = m.BL3;
+                       oparams3[9].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//m.SJC;
+                       listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams3));
+                   }
+               }
            }
-           int ret = af.ExecuteNonQueryTransactionNoZero(listParamters);
+           int ret = af.ExecuteNonQueryTransaction(listParamters);
            return ret;
        }
 
@@ -374,6 +418,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("SELECT  ");
             sBuilder.Append("T.ID,");
             sBuilder.Append("T.SJYID,");
+            sBuilder.Append("T2.PZMC SJYMC,");
             sBuilder.Append("T.SQLDATANAME,");
             sBuilder.Append("T.SQLDATADISCRIBE,");
             sBuilder.Append("T.SQL,");
@@ -385,8 +430,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("T.SJC,");
             sBuilder.Append("T.SFSC,");
             sBuilder.Append("T.SFJY,");
-            sBuilder.Append("T.UNITTYPEID ");  
+            sBuilder.Append("T.UNITTYPEID,");
+            sBuilder.Append("T3.LXMC UNITTYPENAME ");
             sBuilder.Append("FROM T_D_SQLDATA_MST T ");
+            sBuilder.Append("LEFT JOIN T_BASE_SJYPZ T2 ON T.SJYID=T2.PZBM ");
+            sBuilder.Append("LEFT JOIN T_BASE_UNITTYPE T3 ON T.UNITTYPEID=T3.LXBM ");
             sBuilder.Append("WHERE T.ID=:ID ");
             OracleParameter[] oparams ={
              new OracleParameter(":ID",OracleType.VarChar)
@@ -407,10 +455,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                 model.CJSJ = ToString(dr["CJSJ"]);
                 model.XGR = ToString(dr["XGR"]);
                 model.XGSJ = ToString(dr["XGSJ"]);
-                model.SJC = ToString(dr["SJC"]); 
+                model.SJC = ToString(dr["SJC"]);
                 model.SFSC = ToInt(dr["SFSC"]);
                 model.SFJY = ToInt(dr["SFJY"]);
                 model.UNITTYPEID = ToString(dr["UNITTYPEID"]);
+                model.SJYMC = ToString(dr["SJYMC"]);
+                model.UNITTYPENAME = ToString(dr["UNITTYPENAME"]);
                 model.SLVList = QuerySlvList(id);
             }
             return model;
@@ -424,7 +474,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("SELECT  ");
             sBuilder.Append("T.ID,");
             sBuilder.Append("T.MSTID,");
-            sBuilder.Append("T.PARAMETERANME,");
+            sBuilder.Append("T.PARAMETERNAME,");
             sBuilder.Append("T.PARAMETERTYPE,");
             sBuilder.Append("T.PARAMETERDISC,");
             sBuilder.Append("T.DEFAULTVALUE,");
@@ -446,7 +496,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                     T_D_SQLDATA_SLVModel model = new T_D_SQLDATA_SLVModel();
                     model.ID = ToString(dr["ID"]);
                     model.MSTID = ToString(dr["MSTID"]);
-                    model.PARAMETERANME = ToString(dr["PARAMETERANME"]);
+                    model.PARAMETERNAME = ToString(dr["PARAMETERNAME"]);
                     model.PARAMETERTYPE = ToString(dr["PARAMETERTYPE"]);
                     model.PARAMETERDISC = ToString(dr["PARAMETERDISC"]);
                     model.DEFAULTVALUE = ToString(dr["DEFAULTVALUE"]);
@@ -472,6 +522,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("SELECT  ");
             sBuilder.Append("T.ID,");
             sBuilder.Append("T.SJYID,");
+            sBuilder.Append("T2.PZMC SJYMC,");
             sBuilder.Append("T.SQLDATANAME,");
             sBuilder.Append("T.SQLDATADISCRIBE,");
             sBuilder.Append("T.SQL,");
@@ -483,8 +534,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("T.SJC,");
             sBuilder.Append("T.SFSC,");
             sBuilder.Append("T.SFJY,");
-            sBuilder.Append("T.UNITTYPEID ");  
+            sBuilder.Append("T.UNITTYPEID,");
+            sBuilder.Append("T3.LXMC UNITTYPENAME ");
             sBuilder.Append("FROM T_D_SQLDATA_MST T ");
+            sBuilder.Append("LEFT JOIN T_BASE_SJYPZ T2 ON T.SJYID=T2.PZBM ");
+            sBuilder.Append("LEFT JOIN T_BASE_UNITTYPE T3 ON T.UNITTYPEID=T3.LXBM ");
             if (!String.IsNullOrEmpty(swhere))
             {
                 sBuilder.Append(String.Format("WHERE {0} ", swhere));
@@ -514,6 +568,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                     model.SFSC = ToInt(dr["SFSC"]);
                     model.SFJY = ToInt(dr["SFJY"]);
                     model.UNITTYPEID = ToString(dr["UNITTYPEID"]);
+                    model.SJYMC = ToString(dr["SJYMC"]);
+                    model.UNITTYPENAME = ToString(dr["UNITTYPENAME"]);
                     models.Add(model);
                 }
             }

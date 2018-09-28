@@ -35,5 +35,51 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             }
             return models;
         }
+
+        public static bool SqlDataAdd(Model.T_D_SQLDATA_MSTModel model)
+        {
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            int ret = af.Add(model);
+            return ret > 0;
+        }
+
+        public static bool SqlDataEdit(Model.T_D_SQLDATA_MSTModel model)
+        {
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            int ret = af.Modify(model);
+            return ret > 0;
+        }
+
+        public static bool SqlDataDel(string id)
+        {
+            Model.T_D_SQLDATA_MSTModel model = GetSqlDataModel(id);
+            model.SFSC = 1;
+            return SqlDataEdit(model);
+        }
+
+
+        public static Model.T_D_SQLDATA_MSTModel GetSqlDataModel(string id)
+        {
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            return af.Query(id);
+        }
+
+        public static List<Model.T_D_SQLDATA_MSTModel> GetAllSqlDataList()
+        {
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            return af.QueryList("T.SFSC=0", "T.ID");
+        }
+
+        public static List<Model.T_D_SQLDATA_MSTModel> GetSqlDataListFromGroupId(string groupId)
+        {
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            return af.QueryList("T.UNITTYPEID='" + groupId + "' AND T.SFSC=0", "T.ID");
+        }
+
+        public static List<Model.T_D_SQLDATA_SLVModel> GetSqlDataParameterFromSqlDataId(string sqlDataId) { 
+            Access.FactoryT_D_SQLDATA_MSTAccess af = new Access.FactoryT_D_SQLDATA_MSTAccess();
+            Model.T_D_SQLDATA_MSTModel model = af.Query(sqlDataId);
+            return model.SLVList;
+        }
     }
 }

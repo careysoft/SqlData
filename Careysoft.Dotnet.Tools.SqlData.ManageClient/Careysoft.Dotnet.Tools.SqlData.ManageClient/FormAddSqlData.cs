@@ -31,75 +31,75 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            //if (String.IsNullOrEmpty(txt_name.Text))
-            //{
-            //    XtraMessageBox.Show("配置名称不能为空");
-            //    txt_name.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_ip.Text)) {
-            //    XtraMessageBox.Show("IP地址不能为空");
-            //    txt_ip.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_port.Text))
-            //{
-            //    XtraMessageBox.Show("端口不能为空");
-            //    txt_port.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_sjylx.Text))
-            //{
-            //    XtraMessageBox.Show("请选择数据源类型");
-            //    txt_sjylx.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_sid.Text))
-            //{
-            //    XtraMessageBox.Show("数据源不能为空");
-            //    txt_sid.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_uid.Text))
-            //{
-            //    XtraMessageBox.Show("用户名不能为空");
-            //    txt_uid.Focus();
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txt_pass.Text))
-            //{
-            //    XtraMessageBox.Show("密码不能为空");
-            //    txt_pass.Focus();
-            //    return;
-            //}
-            //if (!Careysoft.Basic.Public.RegexMatch.IsIpAddress(txt_ip.Text))
-            //{
-            //    XtraMessageBox.Show("IP地址输入不正确");
-            //    txt_ip.Focus();
-            //    return;
-            //}
-            //if (!Careysoft.Basic.Public.RegexMatch.IsZZS(txt_port.Text))
-            //{
-            //    XtraMessageBox.Show("端口号输入不正确");
-            //    txt_port.Focus();
-            //    return;
-            //}
-            
-            //Model.T_BASE_SJYPZModel model = new Model.T_BASE_SJYPZModel();
-            //model.PZMC = txt_name.Text;
-            //model.SJIP = txt_ip.Text;
-            //model.SJPORT = txt_port.Text;
-            //model.SJSID = txt_sid.Text;
-            //model.SJUSERID = txt_uid.Text;
-            //model.SJPASSWORD = txt_pass.Text;
-            //model.BL1 = txt_sjylx.SelectedIndex.ToString();
-            //if (Access.DataSource.SJYPZAdd(model))
-            //{
-            //    DialogResult = System.Windows.Forms.DialogResult.OK;
-            //}
-            //else {
-            //    XtraMessageBox.Show("新增失败");
-            //}
+            if (String.IsNullOrEmpty(txt_SJYID.Text))
+            {
+                XtraMessageBox.Show("数据源不能为空");
+                txt_SJYID.Focus();
+                return;
+            }
+            if (String.IsNullOrEmpty(txt_SQLDATANAME.Text))
+            {
+                XtraMessageBox.Show("SqlData名称不能为空");
+                txt_SQLDATANAME.Focus();
+                return;
+            }
+            if (String.IsNullOrEmpty(txt_SQLTYPE.Text))
+            {
+                XtraMessageBox.Show("SqlData类型不能为空");
+                txt_SQLTYPE.Focus();
+                return;
+            }
+            if (String.IsNullOrEmpty(txt_SQL.Text))
+            {
+                XtraMessageBox.Show("SQL不能为空");
+                txt_SQL.Focus();
+                return;
+            }
+            Model.T_D_SQLDATA_MSTModel model = new Model.T_D_SQLDATA_MSTModel();
+            string sql = txt_SQL.Text.ToUpper();
+            Regex re = new Regex(@"&\w*");
+            MatchCollection matchs = re.Matches(sql);
+            string parameters = "";
+            for (int i = 0; i < matchs.Count; i++)
+            {
+                parameters += ";" + matchs[i].Value;
+            }
+            if (!String.IsNullOrEmpty(parameters))
+            {
+                parameters = parameters.Substring(1);
+                string[] arraySqlParameters = parameters.Split(';');
+                for (int i = 0; i < arraySqlParameters.Length; i++) {
+                    Model.T_D_SQLDATA_SLVModel modelSlv = new Model.T_D_SQLDATA_SLVModel();
+                    modelSlv.PARAMETERNAME = arraySqlParameters[i].Substring(1);
+                    modelSlv.PARAMETERTYPE = "STRING";
+                    model.SLVList.Add(modelSlv);
+                }
+                FormSetParameter f = new FormSetParameter(model.SLVList);
+                if (f.ShowDialog() != System.Windows.Forms.DialogResult.OK) {
+                    return;
+                }
+            }
+            model.UNITTYPEID = m_UnitTypeId;
+            model.SJYID = (txt_SJYID.Tag as Model.T_BASE_SJYPZModel).PZBM;
+            model.SQLDATANAME = txt_SQLDATANAME.Text;
+            model.SQLTYPE = txt_SQLTYPE.SelectedIndex.ToString();
+            model.SQLDATADISCRIBE = txt_SQLDATADISCRIBE.Text;
+            model.SQL = sql;
+            if (txt_SFJY_S.Checked)
+            {
+                model.SFJY = 1;
+            }
+            else {
+                model.SFJY = 0;
+            }
+            if (Access.SqlData.SqlDataAdd(model))
+            {
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                XtraMessageBox.Show("新增失败");
+            }
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -143,7 +143,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 }
                 List<Model.T_D_SQLDATA_SLVModel> models = f.SqlParameters;
                 foreach (Model.T_D_SQLDATA_SLVModel model in models) {
-                    sql = sql.Replace("&" + model.PARAMETERANME, model.DEFAULTVALUE);
+                    sql = sql.Replace("&" + model.PARAMETERNAME, model.DEFAULTVALUE);
                 }
             }
             xtraTabControl1.TabPages.Clear();
@@ -154,7 +154,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 foreach (DataTable dt in models) {
                     DevExpress.XtraTab.XtraTabPage xTab = xtraTabControl1.TabPages.Add();
                     xTab.Text = " 查询结果 ";
-                    DataSource.UserControlTableGrid uTabGrid = new DataSource.UserControlTableGrid(dt);
+                    SqlData.UserControlTableGrid uTabGrid = new SqlData.UserControlTableGrid(dt);
                     uTabGrid.Dock = DockStyle.Fill;
                     xTab.Controls.Add(uTabGrid);
                 }

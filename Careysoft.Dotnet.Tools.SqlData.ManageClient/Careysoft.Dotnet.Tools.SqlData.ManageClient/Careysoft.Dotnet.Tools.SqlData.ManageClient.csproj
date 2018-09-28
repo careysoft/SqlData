@@ -68,10 +68,16 @@
     <Compile Include="DataSource\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataSource\UserControlTableGrid.cs">
+    <Compile Include="SqlData\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SqlData\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SqlData\UserControlTableGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataSource\UserControlTableGrid.Designer.cs">
+    <Compile Include="SqlData\UserControlTableGrid.Designer.cs">
       <DependentUpon>UserControlTableGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAddDataSource.cs">
@@ -118,10 +124,37 @@
     <Compile Include="FormSetParameter.Designer.cs">
       <DependentUpon>FormSetParameter.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAddTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddTask.Designer.cs">
+      <DependentUpon>FormAddTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectSqlData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectSqlData.Designer.cs">
+      <DependentUpon>FormSelectSqlData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectParameter.Designer.cs">
+      <DependentUpon>FormSelectParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Task\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Task\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DataSource\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataSource\UserControlTableGrid.resx">
+    <EmbeddedResource Include="SqlData\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SqlData\UserControlTableGrid.resx">
       <DependentUpon>UserControlTableGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddDataSource.resx">
@@ -155,6 +188,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSetParameter.resx">
       <DependentUpon>FormSetParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddTask.resx">
+      <DependentUpon>FormAddTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectSqlData.resx">
+      <DependentUpon>FormSelectSqlData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectParameter.resx">
+      <DependentUpon>FormSelectParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
