@@ -62,7 +62,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             string parameters = "";
             for (int i = 0; i < matchs.Count; i++)
             {
-                parameters += ";" + matchs[i].Value;
+                if ((String.Format("{0};", parameters)).IndexOf(String.Format(";{0};", matchs[i].Value)) < 0)
+                {
+                    parameters += ";" + matchs[i].Value;
+                }
             }
             if (!String.IsNullOrEmpty(parameters))
             {
@@ -70,7 +73,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 string[] arraySqlParameters = parameters.Split(';');
                 for (int i = 0; i < arraySqlParameters.Length; i++) {
                     Model.T_D_SQLDATA_SLVModel modelSlv = new Model.T_D_SQLDATA_SLVModel();
-                    modelSlv.PARAMETERNAME = arraySqlParameters[i].Substring(1);
+                    modelSlv.PARAMETERNAME = arraySqlParameters[i];
                     modelSlv.PARAMETERTYPE = "STRING";
                     model.SLVList.Add(modelSlv);
                 }
@@ -133,7 +136,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             MatchCollection matchs = re.Matches(sql);
             string parameters = "";
             for (int i = 0; i < matchs.Count; i++) {
-                parameters += ";"+matchs[i].Value;
+                if ((String.Format("{0};", parameters)).IndexOf(String.Format(";{0};", matchs[i].Value)) < 0)
+                {
+                    parameters += ";" + matchs[i].Value;
+                }
             }
             if (!String.IsNullOrEmpty(parameters)) {
                 parameters = parameters.Substring(1);
@@ -143,7 +149,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 }
                 List<Model.T_D_SQLDATA_SLVModel> models = f.SqlParameters;
                 foreach (Model.T_D_SQLDATA_SLVModel model in models) {
-                    sql = sql.Replace("&" + model.PARAMETERNAME, model.DEFAULTVALUE);
+                    if (model.DEFAULTVALUE.IndexOf("FUN:") == 0)
+                    {
+                        //参数如果为'FUN:XX' 格式，那么就替换原有'&parameter' 如果没有，则替换&parameter
+                        sql = sql.Replace(String.Format("'{0}'", model.PARAMETERNAME), model.DEFAULTVALUE.Substring(4));
+                    }
+                    sql = sql.Replace(String.Format("{0}", model.PARAMETERNAME), model.DEFAULTVALUE);
                 }
             }
             xtraTabControl1.TabPages.Clear();

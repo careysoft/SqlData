@@ -41,5 +41,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             model = af.Query(taskId);
             return model;
         }
+
+        public static bool UpdateLastDateTime(string taskId, string lastDatetime) {
+            Access.FactoryT_D_TASK_MSTAccess af = new Access.FactoryT_D_TASK_MSTAccess();
+            return af.UpdateTaskLastDateTime(taskId, lastDatetime) > 0;
+        }
     }
 }

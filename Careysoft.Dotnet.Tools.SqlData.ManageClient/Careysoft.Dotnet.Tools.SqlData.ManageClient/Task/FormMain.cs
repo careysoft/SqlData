@@ -21,6 +21,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.Task
             txt_BEGINTIME.Time = Convert.ToDateTime(m_TaskModel.BEGINDATETIME);
             txt_INTERVAL.Text = m_TaskModel.INTERVAL.ToString();
             txt_INTERVALTYPE.SelectedIndex = Careysoft.Basic.Public.BConvert.ToInt(m_TaskModel.INTERVALTYPE);
+            txt_INTERVALADDTYPE.SelectedIndex = Careysoft.Basic.Public.BConvert.ToInt(m_TaskModel.INTERVALADDTYPE); 
             txt_SFJY_S.Checked = m_TaskModel.SFJY == 1;
             txt_TASKDISCRIBE.Text = m_TaskModel.TASKDISCRIBE;
             gridControl1.DataSource = m_TaskModel.SlvList;
@@ -264,8 +265,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.Task
             m_TaskModel.TASKNAME = txt_TASKNAME.Text;
             m_TaskModel.TASKNUMBER = Careysoft.Basic.Public.BConvert.ToInt(txt_TASKNUMBER.Text);
             m_TaskModel.BEGINDATETIME = txt_BEGINDATE.DateTime.ToString("yyyy-MM-dd") + " " + txt_BEGINTIME.Time.ToString("HH:mm:ss");
+            m_TaskModel.LASTDATETIME = m_TaskModel.BEGINDATETIME;
+            m_TaskModel.TASKDONUMBER = 0;
             m_TaskModel.INTERVAL = Careysoft.Basic.Public.BConvert.ToInt(txt_INTERVAL.Text);
             m_TaskModel.INTERVALTYPE = txt_INTERVALTYPE.SelectedIndex.ToString();
+            m_TaskModel.INTERVALADDTYPE = txt_INTERVALADDTYPE.SelectedIndex.ToString(); 
             if (txt_SFJY_F.Checked)
             {
                 m_TaskModel.SFJY = 0;

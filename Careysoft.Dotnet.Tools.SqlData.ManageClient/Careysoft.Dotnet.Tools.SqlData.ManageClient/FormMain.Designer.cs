@@ -54,6 +54,12 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new DevExpress.XtraEditors.SplitterControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barToolbarsListItem1 = new DevExpress.XtraBars.BarToolbarsListItem();
+            this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -81,9 +87,15 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barSubItem1,
-            this.barButtonItem1});
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barToolbarsListItem1,
+            this.barSubItem2,
+            this.barSubItem3,
+            this.barSubItem4,
+            this.barButtonItem3});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 2;
+            this.barManager1.MaxItemId = 8;
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar2
@@ -93,7 +105,8 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -181,7 +194,7 @@
             this.toolStripSeparator1,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // toolStripMenuItem2
@@ -214,6 +227,7 @@
             this.toolStripMenuItem1_1.Name = "toolStripMenuItem1_1";
             this.toolStripMenuItem1_1.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem1_1.Text = "新增分组(&A)";
+            this.toolStripMenuItem1_1.Click += new System.EventHandler(this.toolStripMenuItem1_1_Click);
             // 
             // toolStripMenuItem1_2
             // 
@@ -260,6 +274,47 @@
             // 
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItem2";
+            this.barButtonItem2.Id = 2;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barToolbarsListItem1
+            // 
+            this.barToolbarsListItem1.Caption = "barToolbarsListItem1";
+            this.barToolbarsListItem1.Id = 3;
+            this.barToolbarsListItem1.Name = "barToolbarsListItem1";
+            // 
+            // barSubItem2
+            // 
+            this.barSubItem2.Caption = "查看(&V)";
+            this.barSubItem2.Id = 4;
+            this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem3)});
+            this.barSubItem2.Name = "barSubItem2";
+            // 
+            // barSubItem3
+            // 
+            this.barSubItem3.Caption = "错误日志(&L)";
+            this.barSubItem3.Id = 5;
+            this.barSubItem3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
+            this.barSubItem3.Name = "barSubItem3";
+            // 
+            // barSubItem4
+            // 
+            this.barSubItem4.Caption = "当天(&T)";
+            this.barSubItem4.Id = 6;
+            this.barSubItem4.Name = "barSubItem4";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "当天(&T)";
+            this.barButtonItem3.Id = 7;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
             // FormMain
             // 
@@ -314,6 +369,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private DevExpress.XtraBars.BarSubItem barSubItem2;
+        private DevExpress.XtraBars.BarSubItem barSubItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarToolbarsListItem barToolbarsListItem1;
+        private DevExpress.XtraBars.BarSubItem barSubItem4;
 
     }
 }

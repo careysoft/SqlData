@@ -29,10 +29,17 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             string[] strSqlParameters = parameters.Split(';');
             for (int i = 0; i < strSqlParameters.Length; i++) {
                 Model.T_D_SQLDATA_SLVModel model = new Model.T_D_SQLDATA_SLVModel();
-                model.PARAMETERNAME = strSqlParameters[i].Substring(1);
+                model.PARAMETERNAME = strSqlParameters[i];
                 m_SqlParameters.Add(model);
             }
             gridControl1.DataSource = m_SqlParameters;
+        }
+
+        public FormSetParameter(List<Model.T_D_SQLDATA_SLVModel> models, int ftype) {
+            InitializeComponent();
+            gridView1.Columns.RemoveAt(3);
+            gridView1.Columns.RemoveAt(1);
+            gridControl1.DataSource = models;
         }
 
         public FormSetParameter(List<Model.T_D_SQLDATA_SLVModel> models)

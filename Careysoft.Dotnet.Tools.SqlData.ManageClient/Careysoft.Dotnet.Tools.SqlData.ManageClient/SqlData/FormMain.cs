@@ -72,12 +72,31 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
             string parameters = "";
             for (int i = 0; i < matchs.Count; i++)
             {
-                parameters += ";" + matchs[i].Value;
+                if ((String.Format("{0};", parameters)).IndexOf(String.Format(";{0};", matchs[i].Value)) < 0)
+                {
+                    parameters += ";" + matchs[i].Value;
+                }
             }
             if (!String.IsNullOrEmpty(parameters))
             {
                 parameters = parameters.Substring(1);
-                FormSetParameter f = new FormSetParameter(parameters);
+                string[] parameterArray = parameters.Split(';');
+                List<Model.T_D_SQLDATA_SLVModel> parameterList = new List<Model.T_D_SQLDATA_SLVModel>();
+                for (int i = 0; i < parameterArray.Length; i++)
+                {
+                    Model.T_D_SQLDATA_SLVModel parameterModel = m_SqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == parameterArray[i]; });
+                    if (parameterModel != null)
+                    {
+                        parameterList.Add(parameterModel);
+                    }
+                    else {
+                        parameterModel = new Model.T_D_SQLDATA_SLVModel();
+                        parameterModel.PARAMETERNAME = parameterArray[i];
+                        parameterList.Add(parameterModel);
+                    }
+
+                }
+                FormSetParameter f = new FormSetParameter(parameterList, 0);
                 if (f.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 {
                     return;
@@ -85,7 +104,12 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
                 List<Model.T_D_SQLDATA_SLVModel> models = f.SqlParameters;
                 foreach (Model.T_D_SQLDATA_SLVModel model in models)
                 {
-                    sql = sql.Replace("&" + model.PARAMETERNAME, model.DEFAULTVALUE);
+                    if (model.DEFAULTVALUE.IndexOf("FUN:") == 0)
+                    {
+                        //参数如果为'FUN:XX' 格式，那么就替换原有'&parameter' 如果没有，则替换&parameter
+                        sql = sql.Replace(String.Format("'{0}'", model.PARAMETERNAME), model.DEFAULTVALUE.Substring(4));
+                    }
+                    sql = sql.Replace(String.Format("{0}", model.PARAMETERNAME), model.DEFAULTVALUE);
                 }
             }
             xtraTabControl1.TabPages.Clear();
@@ -143,18 +167,18 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
             {
                 parameters = parameters.Substring(1);
                 //m_SqlDataModel.SLVList.RemoveAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return ("," + parameters + ",").IndexOf(",&" + m.PARAMETERNAME + ",") < 0; });
-                List<Model.T_D_SQLDATA_SLVModel> delSlvList = m_SqlDataModel.SLVList.FindAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return (";" + parameters + ";").IndexOf(";&" + m.PARAMETERNAME + ";") < 0; });
+                List<Model.T_D_SQLDATA_SLVModel> delSlvList = m_SqlDataModel.SLVList.FindAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return (";" + parameters + ";").IndexOf(";" + m.PARAMETERNAME + ";") < 0; });
                 foreach (Model.T_D_SQLDATA_SLVModel m in delSlvList) {
                     m.SFSC = 1;
                 }
                 string[] arraySqlParameters = parameters.Split(';');
                 for (int i = 0; i < arraySqlParameters.Length; i++)
                 {
-                    Model.T_D_SQLDATA_SLVModel modelSlv = m_SqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == arraySqlParameters[i].Substring(1); });
+                    Model.T_D_SQLDATA_SLVModel modelSlv = m_SqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == arraySqlParameters[i]; });
                     if (modelSlv == null)
                     {
                         modelSlv = new Model.T_D_SQLDATA_SLVModel();
-                        modelSlv.PARAMETERNAME = arraySqlParameters[i].Substring(1);
+                        modelSlv.PARAMETERNAME = arraySqlParameters[i];
                         modelSlv.PARAMETERTYPE = "STRING";
                         model.SLVList.Add(modelSlv);
                     }

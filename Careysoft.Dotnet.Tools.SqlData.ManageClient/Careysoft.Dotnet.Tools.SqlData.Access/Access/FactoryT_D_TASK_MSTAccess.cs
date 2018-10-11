@@ -72,5 +72,15 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access
         {
             return access.QueryList(swhere, orders);
         }
+
+        /// <summary>
+        /// 更新最后一次时间
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="lastDatetime"></param>
+        /// <returns></returns>
+        public int UpdateTaskLastDateTime(string taskId, string lastDatetime) {
+            return access.UpdateTaskLastDateTime(taskId, lastDatetime);
+        }
     }
 }

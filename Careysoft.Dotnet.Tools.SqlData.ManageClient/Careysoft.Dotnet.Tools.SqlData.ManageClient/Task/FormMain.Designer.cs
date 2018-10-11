@@ -89,6 +89,8 @@
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.txt_INTERVALADDTYPE = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -125,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -133,7 +136,7 @@
             this.panelControl1.Controls.Add(this.btn_del);
             this.panelControl1.Controls.Add(this.btn_save);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 384);
+            this.panelControl1.Location = new System.Drawing.Point(0, 445);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(802, 55);
             this.panelControl1.TabIndex = 1;
@@ -162,7 +165,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(802, 384);
+            this.xtraTabControl1.Size = new System.Drawing.Size(802, 445);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -170,6 +173,8 @@
             // 
             // xtraTabPage1
             // 
+            this.xtraTabPage1.Controls.Add(this.txt_INTERVALADDTYPE);
+            this.xtraTabPage1.Controls.Add(this.labelControl7);
             this.xtraTabPage1.Controls.Add(this.txt_TASKDISCRIBE);
             this.xtraTabPage1.Controls.Add(this.labelControl6);
             this.xtraTabPage1.Controls.Add(this.txt_SFJY_F);
@@ -187,19 +192,19 @@
             this.xtraTabPage1.Controls.Add(this.labelControl1);
             this.xtraTabPage1.Controls.Add(this.txt_TASKNAME);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(796, 357);
+            this.xtraTabPage1.Size = new System.Drawing.Size(796, 418);
             this.xtraTabPage1.Text = "    基本设置    ";
             // 
             // txt_TASKDISCRIBE
             // 
-            this.txt_TASKDISCRIBE.Location = new System.Drawing.Point(97, 220);
+            this.txt_TASKDISCRIBE.Location = new System.Drawing.Point(97, 256);
             this.txt_TASKDISCRIBE.Name = "txt_TASKDISCRIBE";
             this.txt_TASKDISCRIBE.Size = new System.Drawing.Size(324, 122);
             this.txt_TASKDISCRIBE.TabIndex = 24;
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(16, 223);
+            this.labelControl6.Location = new System.Drawing.Point(16, 259);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(48, 14);
             this.labelControl6.TabIndex = 23;
@@ -208,7 +213,7 @@
             // txt_SFJY_F
             // 
             this.txt_SFJY_F.EditValue = true;
-            this.txt_SFJY_F.Location = new System.Drawing.Point(160, 188);
+            this.txt_SFJY_F.Location = new System.Drawing.Point(160, 224);
             this.txt_SFJY_F.Name = "txt_SFJY_F";
             this.txt_SFJY_F.Properties.Caption = "否";
             this.txt_SFJY_F.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
@@ -218,7 +223,7 @@
             // 
             // txt_SFJY_S
             // 
-            this.txt_SFJY_S.Location = new System.Drawing.Point(95, 188);
+            this.txt_SFJY_S.Location = new System.Drawing.Point(95, 224);
             this.txt_SFJY_S.Name = "txt_SFJY_S";
             this.txt_SFJY_S.Properties.Caption = "是";
             this.txt_SFJY_S.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
@@ -249,6 +254,7 @@
             // 
             // txt_INTERVAL
             // 
+            this.txt_INTERVAL.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txt_INTERVAL.Location = new System.Drawing.Point(97, 146);
             this.txt_INTERVAL.Name = "txt_INTERVAL";
             this.txt_INTERVAL.Properties.Mask.EditMask = "d";
@@ -306,7 +312,7 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(16, 190);
+            this.labelControl5.Location = new System.Drawing.Point(16, 226);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(48, 14);
             this.labelControl5.TabIndex = 7;
@@ -740,11 +746,35 @@
             this.repositoryItemHyperLinkEdit1.AutoHeight = false;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             // 
+            // txt_INTERVALADDTYPE
+            // 
+            this.txt_INTERVALADDTYPE.EditValue = "执行开始时间间隔";
+            this.txt_INTERVALADDTYPE.Location = new System.Drawing.Point(97, 185);
+            this.txt_INTERVALADDTYPE.Name = "txt_INTERVALADDTYPE";
+            this.txt_INTERVALADDTYPE.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(95)))), ((int)(((byte)(95)))));
+            this.txt_INTERVALADDTYPE.Properties.Appearance.Options.UseBackColor = true;
+            this.txt_INTERVALADDTYPE.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txt_INTERVALADDTYPE.Properties.Items.AddRange(new object[] {
+            "执行开始时间间隔",
+            "执行完成后间隔"});
+            this.txt_INTERVALADDTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txt_INTERVALADDTYPE.Size = new System.Drawing.Size(151, 21);
+            this.txt_INTERVALADDTYPE.TabIndex = 28;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(16, 188);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(48, 14);
+            this.labelControl7.TabIndex = 27;
+            this.labelControl7.Text = "间隔方式";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 439);
+            this.ClientSize = new System.Drawing.Size(802, 500);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
             this.Name = "FormMain";
@@ -786,6 +816,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -847,5 +878,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private DevExpress.XtraEditors.ComboBoxEdit txt_INTERVALADDTYPE;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
     }
 }

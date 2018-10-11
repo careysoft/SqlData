@@ -39,8 +39,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         {
             InitializeComponent();
         }
-        
         private void LoadNav() {
+            Dictionary<string, bool> dict = new Dictionary<string, bool>();
+            foreach (NavBarGroup nbg in navBarControl1.Groups) {
+                dict.Add(nbg.Caption, nbg.Expanded);
+            }
             navBarControl1.Groups.Clear();
             //List<Model.T_BASE_UNITTYPEModel> unittypes = Access.Unit.GetAllUnitTypeModel();
             //if (unittypes.Count == 0)
@@ -69,7 +72,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 NavBarItemLink nil = new NavBarItemLink(ni);
                 nb2.ItemLinks.Add(nil);
             }
-            nb2.Expanded = true;
+            nb2.Expanded = dict.ContainsKey("数据源") ? dict["数据源"] : true;//true;
             navBarControl1.Groups.Add(nb2);
 
             NavBarGroup nb3 = new NavBarGroup("任务组");
@@ -83,7 +86,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 NavBarItemLink nil = new NavBarItemLink(ni);
                 nb3.ItemLinks.Add(nil);
             }
-            nb3.Expanded = true;
+            nb3.Expanded = dict.ContainsKey("任务组") ? dict["任务组"] : true;
             navBarControl1.Groups.Add(nb3);
 
             List<Model.T_BASE_UNITTYPEModel> unittypes = Access.UnitType.GetUnitTypeList();
@@ -111,7 +114,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                     }
                     nb.ItemLinks.Add(nil);
                 }
-                nb.Expanded = true;
+                nb.Expanded = dict.ContainsKey(m.LXMC) ? dict[m.LXMC] : true; ;
                 navBarControl1.Groups.Add(nb);
             }
         }
@@ -318,6 +321,22 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 LoadNav();
             }
+        }
+
+        private void toolStripMenuItem1_1_Click(object sender, EventArgs e)
+        {
+            FormAddUnitType f = new FormAddUnitType();
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                LoadNav();
+            }
+        }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string errorInfo = Careysoft.Basic.Public.Log.GetTodayErrorInfo(Encoding.UTF8);
+            Careysoft.Dev.Public.FormShowMemo f = new Dev.Public.FormShowMemo("错误日志", errorInfo);
+            f.ShowDialog();
         }
     }
 }

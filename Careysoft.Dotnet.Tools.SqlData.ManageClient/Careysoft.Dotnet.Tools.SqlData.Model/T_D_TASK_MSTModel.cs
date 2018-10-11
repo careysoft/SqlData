@@ -130,6 +130,23 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
                 m_INTERVALTYPE = value;
             }
         }
+
+        private string m_INTERVALADDTYPE;
+        ///<summary>
+        ///间隔类型0从间隔起始时间间隔 1从执行完成后间隔 
+        ///</summary>
+        public string INTERVALADDTYPE
+        {
+            get
+            {
+                return m_INTERVALADDTYPE;
+            }
+            set
+            {
+                m_INTERVALADDTYPE = value;
+            }
+        }
+
         private int m_SFSC;
         ///<summary>
         ///是否删除0否1是

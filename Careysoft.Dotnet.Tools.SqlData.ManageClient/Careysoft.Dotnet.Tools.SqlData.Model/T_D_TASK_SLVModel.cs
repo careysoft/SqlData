@@ -82,9 +82,17 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
         /// </summary>
         public string SJYMC { get; set; }
         /// <summary>
+        /// 数据源编码
+        /// </summary>
+        public string SJYBM { get; set; }
+        /// <summary>
         /// 分组名称
         /// </summary>
         public string GROUPMC { get; set; }
+        /// <summary>
+        /// 对应SQL
+        /// </summary>
+        public string SQL { get; set; }
 
         private string m_BL1;
         ///<summary>

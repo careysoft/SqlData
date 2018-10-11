@@ -42,5 +42,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access
         /// <param name="model"></param>
         /// <returns></returns>
         List<T_D_TASK_MSTModel> QueryList(string swhere, string orders);
+
+        int UpdateTaskLastDateTime(string taskId, string lastDatetime);
     }
 }

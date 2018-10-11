@@ -66,8 +66,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             modelMst.TASKNAME = txt_TASKNAME.Text;
             modelMst.TASKNUMBER = Careysoft.Basic.Public.BConvert.ToInt(txt_TASKNUMBER.Text);
             modelMst.BEGINDATETIME = txt_BEGINDATE.DateTime.ToString("yyyy-MM-dd") + " " + txt_BEGINTIME.Time.ToString("HH:mm:ss");
+            modelMst.LASTDATETIME = modelMst.BEGINDATETIME;
             modelMst.INTERVAL = Careysoft.Basic.Public.BConvert.ToInt(txt_INTERVAL.Text);
             modelMst.INTERVALTYPE = txt_INTERVALTYPE.SelectedIndex.ToString();
+            modelMst.INTERVALADDTYPE = txt_INTERVALADDTYPE.SelectedIndex.ToString();
             if (txt_SFJY_F.Checked) {
                 modelMst.SFJY = 0;
             }
