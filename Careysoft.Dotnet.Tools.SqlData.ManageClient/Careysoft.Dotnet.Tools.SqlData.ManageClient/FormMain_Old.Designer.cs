@@ -1,6 +1,6 @@
 ﻿namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
-    partial class FormMain
+    partial class FormMain_Old
     {
         /// <summary>
         /// Required designer variable.
@@ -49,11 +49,21 @@
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1_1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1_2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1_3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new DevExpress.XtraEditors.SplitterControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabbedMdiManager1
@@ -217,9 +227,81 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem4,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem2.Text = "新增数据源(&D)";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem5.Text = "新增任务(&T)";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1_1,
+            this.toolStripMenuItem1_2,
+            this.toolStripMenuItem1_3});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem1.Text = "Sql分组管理(&U)";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem1_1
+            // 
+            this.toolStripMenuItem1_1.Name = "toolStripMenuItem1_1";
+            this.toolStripMenuItem1_1.Size = new System.Drawing.Size(141, 22);
+            this.toolStripMenuItem1_1.Text = "新增分组(&A)";
+            this.toolStripMenuItem1_1.Click += new System.EventHandler(this.toolStripMenuItem1_1_Click);
+            // 
+            // toolStripMenuItem1_2
+            // 
+            this.toolStripMenuItem1_2.Name = "toolStripMenuItem1_2";
+            this.toolStripMenuItem1_2.Size = new System.Drawing.Size(141, 22);
+            this.toolStripMenuItem1_2.Text = "编辑分组(&E)";
+            this.toolStripMenuItem1_2.Click += new System.EventHandler(this.toolStripMenuItem1_2_Click);
+            // 
+            // toolStripMenuItem1_3
+            // 
+            this.toolStripMenuItem1_3.Name = "toolStripMenuItem1_3";
+            this.toolStripMenuItem1_3.Size = new System.Drawing.Size(141, 22);
+            this.toolStripMenuItem1_3.Text = "删除分组(&D)";
+            this.toolStripMenuItem1_3.Click += new System.EventHandler(this.toolStripMenuItem1_3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem4.Text = "新增SqlData(&D)";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem3.Text = "刷新(&R)";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // splitter1
             // 
@@ -256,6 +338,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -275,14 +358,23 @@
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraEditors.SplitterControl splitter1;
         private DevExpress.XtraNavBar.NavBarControl navBarControl1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1_3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private DevExpress.XtraBars.BarSubItem barSubItem2;
         private DevExpress.XtraBars.BarSubItem barSubItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarToolbarsListItem barToolbarsListItem1;
         private DevExpress.XtraBars.BarSubItem barSubItem4;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 
     }
 }

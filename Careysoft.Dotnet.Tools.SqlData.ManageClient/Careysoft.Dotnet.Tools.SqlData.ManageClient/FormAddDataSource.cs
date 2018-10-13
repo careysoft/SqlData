@@ -11,8 +11,15 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
     public partial class FormAddDataSource : CareySoft.FormObject.FormShowDialogObject
     {
+        private string m_SjyGroup = "";
         public FormAddDataSource()
         {
+            InitializeComponent();
+        }
+
+        public FormAddDataSource(string sjyGroup)
+        {
+            m_SjyGroup = sjyGroup;
             InitializeComponent();
         }
 
@@ -80,6 +87,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             model.SJUSERID = txt_uid.Text;
             model.SJPASSWORD = txt_pass.Text;
             model.BL1 = txt_sjylx.SelectedIndex.ToString();
+            model.BL2 = m_SjyGroup;
             if (Access.DataSource.SJYPZAdd(model))
             {
                 DialogResult = System.Windows.Forms.DialogResult.OK;

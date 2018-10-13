@@ -9,6 +9,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
 {
     public class TaskServer
     {
+        public Model.EventMessageHandler EventRecieveThreadMessage;
+
         private ConcurrentBag<TaskThread> m_TaskThreadList = new ConcurrentBag<TaskThread>();
 
         public TaskServer()
@@ -21,12 +23,18 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
             foreach (Model.T_D_TASK_MSTModel task in taskList) {
                 TaskThread taskThread = new TaskThread(task.ID);
                 string errorinfo = "";
+                taskThread.EventThreadMessage += new Model.EventMessageHandler(EventReciveThreadMessage);
                 taskThread.StartTask(ref errorinfo);
                 m_TaskThreadList.Add(taskThread);
             }
             return true;
         }
-
+        private void EventReciveThreadMessage(Model.EventMessageModel model)
+        {
+            if (EventRecieveThreadMessage != null) {
+                EventRecieveThreadMessage(model);
+            }
+        }
         public bool TaskDispose() {
             while (!m_TaskThreadList.IsEmpty) {
                 TaskThread task = null;

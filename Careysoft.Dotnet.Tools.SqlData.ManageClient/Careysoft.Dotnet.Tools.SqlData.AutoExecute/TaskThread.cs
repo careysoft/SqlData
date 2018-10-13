@@ -6,12 +6,19 @@ using System.Threading;
 using System.Data;
 using System.IO;
 using OfficeOpenXml;
+using Careysoft.Dotnet.Tools.SqlData.Model;
 
 namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
 {
     public class TaskThread
     {
-        public event EventHandler EventThreadMessage;
+        public EventMessageHandler EventThreadMessage;
+
+        private void ThreadSendMessage(string code, string procedureName, string message) {
+            if (EventThreadMessage != null) {
+                EventThreadMessage(new EventMessageModel(code, procedureName, message));
+            }
+        }
 
         public TaskThread(string taskId) {
             m_TaskModel = Access.Task.GetTaskFromId(taskId);
@@ -46,15 +53,19 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
             if (String.IsNullOrEmpty(m_TaskModel.ID))
             {
                 errorinfo = "没有找到任务";
+                ThreadSendMessage("error", "StartTask", errorinfo);
                 return false;
             }
             if (m_ThreadMain != null) {
                 errorinfo = "任务正在执行";
+                ThreadSendMessage("error", "StartTask", errorinfo);
                 return false;
             }
-            EventThreadMessage("start", null);
+            //EventThreadMessage("start", null);
+            ThreadSendMessage("start", "StartTask", m_TaskModel.TASKNAME);
             m_Running = true;
             m_ThreadMain = new Thread(TaskProcess);
+            m_ThreadMain.Start();
             return true;
         }
         /// <summary>
@@ -71,7 +82,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
             Thread.Sleep(1000);
             m_ThreadMain.Abort();
             m_ThreadMain = null;
-            EventThreadMessage("stop", null);
+            ThreadSendMessage("stop", "StopTaskForce", m_TaskModel.TASKNAME);
             return true;
         }
         /// <summary>
@@ -85,7 +96,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
             m_Doing = false;
             m_ThreadMain.Abort();
             m_ThreadMain = null;
-            EventThreadMessage("stop", null);
+            ThreadSendMessage("stop", "StopTaskForce", m_TaskModel.TASKNAME);
             return true;
         }
 
@@ -116,9 +127,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                     }
                 }
                 if (startTask) {
+                    ThreadSendMessage("info", "TaskProcess", String.Format("{0}:{1}", m_TaskModel.TASKNAME, "开始执行"));
                     m_Doing = true;
                     TaskDo();
-                    if (m_TaskModel.INTERVALADDTYPE == "0")
+                    if (m_TaskModel.INTERVALADDTYPE == "1")
                     {
                         m_TaskModel.LASTDATETIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     }
@@ -149,6 +161,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                     }
                     Access.Task.UpdateLastDateTime(m_TaskModel.ID, m_TaskModel.LASTDATETIME);
                     m_Doing = false;
+                    ThreadSendMessage("info", "TaskProcess", String.Format("{0}:{1}", m_TaskModel.TASKNAME, "执行结束"));
                 }
                 Thread.Sleep(500);
             }
@@ -170,7 +183,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                     switch (m.SQLDATASLVVAL.Substring(0, 4))
                     {
                         case "FUN:":
-                            sql = sql.Replace(String.Format("'{0},", m.SQLDARASLVNAME), m.SQLDATASLVVAL.Substring(4));
+                            sql = sql.Replace(String.Format("'{0}'", m.SQLDARASLVNAME), m.SQLDATASLVVAL.Substring(4));
                             break;
                         default:
                             sql = sql.Replace(m.SQLDARASLVNAME, m.SQLDATASLVVAL);
@@ -180,7 +193,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                 Model.T_BASE_SJYPZModel sjyModel = Access.DataSource.GetSJYPZFromBM(model.SJYBM);
                 if (String.IsNullOrEmpty(sjyModel.PZBM))
                 {
-                    EventThreadMessage(String.Format("error:{0}", "未找到数据源"), null);
+                    ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:未找到数据源", m_TaskModel.TASKNAME));
                     return;
                 }
                 string errorinfo = "";
@@ -193,123 +206,19 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                         //输出类
                         foreach (DataTable dt in dataTables)
                         {
-                            string fileName = model.OUTPUTPATH + model.SQLDATANAME;
-                            switch (model.OUTPUTTYPE)
-                            {
-                                case "0":
-                                    OutPutDataTableToTxt(dt, fileName + ".txt");
-                                    break;
-                                case "1":
-                                    OutPutDataTableToExcel(dt, fileName + ".xlsx");
-                                    break;
-                                case "2":
-                                    OutPutDataTableToTxt(dt, fileName + ".txt");
-                                    OutPutDataTableToExcel(dt, fileName + ".xlsx");
-                                    break;
+                            string outPutPath = model.OUTPUTPATH[model.OUTPUTPATH.Length - 1] == '\\' ? model.OUTPUTPATH : model.OUTPUTPATH+"\\";
+                            string fileName = outPutPath + model.SQLDATANAME;
+                            var output = Output.OutputCreater.CreateOutput(model.OUTPUTTYPE);
+                            output.OutputData(dt, fileName, ref errorinfo);
+                            if (!String.IsNullOrEmpty(errorinfo)) {
+                                ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:{1}", m_TaskModel.TASKNAME, errorinfo));
                             }
                         }
                     }
                 }
             }
             catch (Exception e) {
-                EventThreadMessage(String.Format("error:{0}", e.Message), null);
-            }
-        }
-
-        private void OutPutDataTableToExcel(DataTable dt, string file) {
-            try
-            {
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    if (File.Exists(file))
-                    {
-                        File.Delete(file);
-                        using (var excel = new ExcelPackage(new FileInfo(file)))
-                        {
-                            string sheelname = file.Substring(file.LastIndexOf('\\') + 1, file.LastIndexOf('.') - file.LastIndexOf('\\') - 1);
-                            var ws = excel.Workbook.Worksheets.Add(sheelname);
-                            for (int i = 0; i < dt.Columns.Count; i++)
-                            {
-                                ws.Cells[1, i + 1].Value = dt.Columns[i].ColumnName;
-                            }
-                            for (int i = 0; i < dt.Rows.Count; i++)
-                            {
-                                for (int j = 0; j < dt.Columns.Count; j++)
-                                {
-                                    ws.Cells[i + 2, j + 1].Value = Careysoft.Basic.Public.BConvert.ToString(dt.Rows[i][j]);
-                                }
-                            }
-                            for (int i = 0; i < dt.Columns.Count; i++)
-                            {
-                                ws.Column(i + 1).AutoFit();
-                            }
-                            excel.Save();
-                        }
-                    }
-                }
-            }
-            catch (Exception e) {
-                EventThreadMessage(String.Format("error:{0}", e.Message), null);
-            }
-        }
-
-        private void OutPutDataTableToTxt(DataTable dt, string file) {
-            try
-            {
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    if (File.Exists(file))
-                    {
-                        File.Delete(file);
-                        FileStream fileStream = null;
-                        try
-                        {
-                            fileStream = File.Create(file);
-                        }
-                        finally
-                        {
-                            fileStream.Close();
-                            fileStream.Dispose();
-                        }
-                        StringBuilder sBuilder = new StringBuilder();
-                        string rowString = "";
-                        for (int j = 0; j < dt.Columns.Count; j++)
-                        {
-                            if (j == 0)
-                            {
-                                rowString += Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
-                            }
-                            else
-                            {
-                                rowString += "\t" + Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
-                            }
-                            sBuilder.AppendLine(rowString);
-                        }
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                        {
-                            rowString = "";
-                            for (int j = 0; j < dt.Columns.Count; j++)
-                            {
-                                if (j == 0)
-                                {
-                                    rowString += Careysoft.Basic.Public.BConvert.ToString(dt.Rows[i][j]);
-                                }
-                                else
-                                {
-                                    rowString += "\t" + Careysoft.Basic.Public.BConvert.ToString(dt.Rows[i][j]);
-                                }
-                            }
-                        }
-                        using (StreamWriter sw = new StreamWriter(file, true, Encoding.Unicode))
-                        {
-                            sw.Write(sBuilder.ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                EventThreadMessage(String.Format("error:{0}", e.Message), null);
+                ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:{1}", m_TaskModel.TASKNAME, e.Message));
             }
         }
     }

@@ -39,7 +39,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             InitializeComponent();
             gridView1.Columns.RemoveAt(3);
             gridView1.Columns.RemoveAt(1);
-            gridControl1.DataSource = models;
+            m_SqlParameters = models;
+            gridControl1.DataSource = m_SqlParameters;
         }
 
         public FormSetParameter(List<Model.T_D_SQLDATA_SLVModel> models)

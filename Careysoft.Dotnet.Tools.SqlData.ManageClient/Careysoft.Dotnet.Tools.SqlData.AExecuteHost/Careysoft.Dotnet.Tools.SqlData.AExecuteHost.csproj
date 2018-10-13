@@ -2,18 +2,21 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{21E95794-5AD8-4038-AEFC-A667AB7D5E2C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5DF0CC39-51B2-496B-8FBA-55887144F85F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Careysoft.Dotnet.Tools.SqlData.AutoExecute</RootNamespace>
-    <AssemblyName>Careysoft.Dotnet.Tools.SqlData.AutoExecute</AssemblyName>
+    <RootNamespace>Careysoft.Dotnet.Tools.SqlData.AExecuteHost</RootNamespace>
+    <AssemblyName>Careysoft.Dotnet.Tools.SqlData.AExecuteHost</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +25,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Careysoft.Basic.Public">
-      <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Basic.Public\bin\Debug\Careysoft.Basic.Public.dll</HintPath>
-    </Reference>
-    <Reference Include="EPPlus">
-      <HintPath>..\..\..\..\..\..\公共安装\25Excel插件\EPPlus 4.0.5\EPPlus.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,20 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMake.cs" />
-    <Compile Include="Output\Output.cs" />
-    <Compile Include="Output\OutputCreater.cs" />
-    <Compile Include="Output\OutputTxt.cs" />
-    <Compile Include="Output\OutputXlsx.cs" />
-    <Compile Include="Output\OutputXlsxAndTxt.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskServer.cs" />
-    <Compile Include="TaskThread.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.Access\Careysoft.Dotnet.Tools.SqlData.Access.csproj">
-      <Project>{001B6879-8124-454D-B4EA-B98F15798E71}</Project>
-      <Name>Careysoft.Dotnet.Tools.SqlData.Access</Name>
+    <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.AutoExecute\Careysoft.Dotnet.Tools.SqlData.AutoExecute.csproj">
+      <Project>{21E95794-5AD8-4038-AEFC-A667AB7D5E2C}</Project>
+      <Name>Careysoft.Dotnet.Tools.SqlData.AutoExecute</Name>
     </ProjectReference>
     <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.Model\Careysoft.Dotnet.Tools.SqlData.Model.csproj">
       <Project>{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}</Project>

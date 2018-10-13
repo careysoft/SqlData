@@ -16,6 +16,14 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             return af.QueryList(where, order);
         }
 
+        public static List<Model.T_BASE_SJYPZModel> GetSJYPZFromGroupId(string groupId)
+        {
+            string where = "T.BL2='" + groupId + "' AND T.SFSC=0";
+            string order = "T.BL1,T.PZBM";
+            Access.FactoryT_BASE_SJYPZAccess af = new Access.FactoryT_BASE_SJYPZAccess();
+            return af.QueryList(where, order);
+        }
+
         public static Model.T_BASE_SJYPZModel GetSJYPZFromBM(string bm)
         {
             Access.FactoryT_BASE_SJYPZAccess af = new Access.FactoryT_BASE_SJYPZAccess();

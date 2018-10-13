@@ -34,10 +34,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             return af.Query(id);
         }
 
-        public static List<Model.T_BASE_UNITTYPEModel> GetUnitTypeList()
+        public static List<Model.T_BASE_UNITTYPEModel> GetUnitTypeList(string flxbm = "0")
         {
             Access.FactoryT_BASE_UNITTYPEAccess af = new Access.FactoryT_BASE_UNITTYPEAccess();
-            return af.QueryList("T.SFSC=0","TO_NUMBER(T.BL1)");
+            return af.QueryList("T.SFSC=0 AND T.FLXBM='" + flxbm + "'", "TO_NUMBER(T.BL1)");
         }
     }
 }

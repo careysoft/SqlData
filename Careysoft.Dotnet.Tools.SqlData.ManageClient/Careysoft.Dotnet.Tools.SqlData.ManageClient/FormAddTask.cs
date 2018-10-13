@@ -73,6 +73,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             if (txt_SFJY_F.Checked) {
                 modelMst.SFJY = 0;
             }
+            else
+            {
+                modelMst.SFJY = 1;
+            }
             modelMst.TASKDISCRIBE = txt_TASKDISCRIBE.Text;
             modelMst.SlvList = models;
             if (Access.Task.TaskAdd(modelMst))

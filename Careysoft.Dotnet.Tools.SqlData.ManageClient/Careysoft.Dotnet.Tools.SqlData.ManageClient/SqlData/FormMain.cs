@@ -112,6 +112,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
                     sql = sql.Replace(String.Format("{0}", model.PARAMETERNAME), model.DEFAULTVALUE);
                 }
             }
+            if (XtraMessageBox.Show("是否查看SQL?", "信息提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+                Careysoft.Dev.Public.FormShowMemo fMemo = new Dev.Public.FormShowMemo("SQL", sql);
+                fMemo.ShowDialog();
+            }
             xtraTabControl1.TabPages.Clear();
             if (txt_SQLTYPE.SelectedIndex == 0)
             {

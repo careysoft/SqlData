@@ -15,7 +15,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            
+            //FormLogin f = new FormLogin();
+            //if (f.ShowDialog() == DialogResult.OK)
+            //{
+            //    FormMain f2 = new FormMain();
+            //    Application.Run(f2);
+            //}
+
+            FormMain f2 = new FormMain();
+            Application.Run(f2);
         }
     }
 }

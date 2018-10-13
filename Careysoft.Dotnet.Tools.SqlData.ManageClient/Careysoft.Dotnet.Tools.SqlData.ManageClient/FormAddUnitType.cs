@@ -11,6 +11,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
     public partial class FormAddUnitType : CareySoft.FormObject.FormShowDialogObject
     {
+        public string FLXBM { get; set; }
+
+        public string FL { get; set; }
+
+        public string LXMC {
+            get {
+                return txt_lxmc.Text;
+            }    
+        }
+
         private Model.T_BASE_UNITTYPEModel m_UnitType = new Model.T_BASE_UNITTYPEModel();
 
         public FormAddUnitType()
@@ -45,7 +55,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             {
                 m_UnitType = new Model.T_BASE_UNITTYPEModel();
                 m_UnitType.LXMC = txt_lxmc.Text;
+                m_UnitType.FLXBM = FLXBM;
                 m_UnitType.BL1 = txt_bl1.Text;
+                m_UnitType.BL2 = FL;
                 if (Access.UnitType.UnitTypeAdd(m_UnitType))
                 {
                     DialogResult = System.Windows.Forms.DialogResult.OK;

@@ -11,7 +11,51 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
 {
     public partial class FormMain : CareySoft.FormObject.FObject
     {
-        private Model.T_BASE_SJYPZModel m_SJYModel = new Model.T_BASE_SJYPZModel();
+        private Model.T_BASE_UNITTYPEModel m_GroupModel = new Model.T_BASE_UNITTYPEModel();
+        private Model.T_BASE_SJYPZModel m_SelectSJYModel = new Model.T_BASE_SJYPZModel();
+
+        /// <summary>
+        /// 设置对话框值
+        /// </summary>
+        /// <param name="sjypm"></param>
+        private void SetValue(string sjypm) {
+            m_SelectSJYModel = Access.DataSource.GetSJYPZFromBM(sjypm);
+            txt_name.Text = m_SelectSJYModel.PZMC;
+            txt_ip.Text = m_SelectSJYModel.SJIP;
+            txt_port.Text = m_SelectSJYModel.SJPORT;
+            txt_sid.Text = m_SelectSJYModel.SJSID;
+            txt_uid.Text = m_SelectSJYModel.SJUSERID;
+            txt_pass.Text = m_SelectSJYModel.SJPASSWORD;
+            txt_sjylx.SelectedIndex = Convert.ToInt32(m_SelectSJYModel.BL1);
+        }
+
+        private void EnableButton(bool val) {
+            foreach (Control control in Controls) {
+                string controlType = control.GetType().ToString();
+                controlType = controlType.Substring(controlType.LastIndexOf('.') + 1);
+                if ("SimpleButton,LabelControl".IndexOf(controlType) >= 0)
+                {
+                    control.Enabled = val;
+                }
+            }
+        }
+
+        private void ClearText() {
+            foreach (Control control in Controls)
+            {
+                string controlType = control.GetType().ToString();
+                controlType = controlType.Substring(controlType.LastIndexOf('.') + 1);
+                if ("TextEdit".IndexOf(controlType) >= 0)
+                {
+                    control.Text = "";
+                }
+                else if ("ComboBoxEdit".IndexOf(controlType) >= 0)
+                {
+                    (control as DevExpress.XtraEditors.ComboBoxEdit).SelectedIndex = -1;
+                }
+            }
+        }
+
         public FormMain()
         {
             InitializeComponent();
@@ -19,14 +63,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
 
         protected override void OnLoad(EventArgs e)
         {
-            m_SJYModel = Access.DataSource.GetSJYPZFromBM(m_Memo);
-            txt_name.Text = m_SJYModel.PZMC;
-            txt_ip.Text = m_SJYModel.SJIP;
-            txt_port.Text = m_SJYModel.SJPORT;
-            txt_sid.Text = m_SJYModel.SJSID;
-            txt_uid.Text = m_SJYModel.SJUSERID;
-            txt_pass.Text = m_SJYModel.SJPASSWORD;
-            txt_sjylx.SelectedIndex = Convert.ToInt32(m_SJYModel.BL1);
+            m_GroupModel = Access.UnitType.GetUnitTypeModel(m_Memo);
+            List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
+            gridControl1.DataSource = sjys;
+            if (sjys.Count > 0)
+            {
+                SetValue(sjys[0].PZBM);
+            }
+            else {
+                EnableButton(false);
+            }
             base.OnLoad(e);
         }
 
@@ -95,18 +141,17 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
                 txt_port.Focus();
                 return;
             }
-            m_SJYModel.PZMC = txt_name.Text;
-            m_SJYModel.SJIP = txt_ip.Text;
-            m_SJYModel.SJPORT = txt_port.Text;
-            m_SJYModel.SJSID = txt_sid.Text;
-            m_SJYModel.SJUSERID = txt_uid.Text;
-            m_SJYModel.SJPASSWORD = txt_pass.Text;
-            m_SJYModel.BL1 = txt_sjylx.SelectedIndex.ToString();
-            if (Access.DataSource.SJYPZEdit(m_SJYModel))
+            m_SelectSJYModel.PZMC = txt_name.Text;
+            m_SelectSJYModel.SJIP = txt_ip.Text;
+            m_SelectSJYModel.SJPORT = txt_port.Text;
+            m_SelectSJYModel.SJSID = txt_sid.Text;
+            m_SelectSJYModel.SJUSERID = txt_uid.Text;
+            m_SelectSJYModel.SJPASSWORD = txt_pass.Text;
+            m_SelectSJYModel.BL1 = txt_sjylx.SelectedIndex.ToString();
+            if (Access.DataSource.SJYPZEdit(m_SelectSJYModel))
             {
                 XtraMessageBox.Show("修改成功");
-                Text = txt_name.Text;
-                SetMessageToFormain(null, null);
+                gridView1.SetFocusedRowCellValue("PZMC", m_SelectSJYModel.PZMC);
             }
             else
             {
@@ -178,14 +223,52 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
         private void btn_del_Click(object sender, EventArgs e)
         {
             if (XtraMessageBox.Show("是否要删除该数据源?", "信息提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
-                if (Access.DataSource.SJYPDel(m_Memo))
+                if (Access.DataSource.SJYPDel(m_SelectSJYModel.PZBM))
                 {
-                    SetMessageToFormain(this, e);
+                    //SetMessageToFormain(this, e);
+                    int rowHandle = gridView1.FocusedRowHandle;
+                    List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
+                    gridControl1.DataSource = sjys;
+                    gridView1.FocusedRowHandle = rowHandle - 1;
+                    if (sjys.Count == 0) {
+                        EnableButton(false);
+                        ClearText();
+                    }
                 }
                 else {
                     XtraMessageBox.Show("删除失败");
                 }
             }
+        }
+
+        private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            Model.T_BASE_SJYPZModel model = gridView1.GetFocusedRow() as Model.T_BASE_SJYPZModel;
+            if (model == null) {
+                return;
+            }
+            SetValue(model.PZBM);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormAddDataSource f = new FormAddDataSource(m_GroupModel.LXBM);
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
+                gridControl1.DataSource = sjys;
+                if (sjys.Count == 1) {
+                    EnableButton(true);
+                }
+                gridView1.FocusedRowHandle = sjys.Count - 1;
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            int rowHandle = gridView1.FocusedRowHandle;
+            List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
+            gridControl1.DataSource = sjys;
+            gridView1.FocusedRowHandle = rowHandle;
         }
     }
 }

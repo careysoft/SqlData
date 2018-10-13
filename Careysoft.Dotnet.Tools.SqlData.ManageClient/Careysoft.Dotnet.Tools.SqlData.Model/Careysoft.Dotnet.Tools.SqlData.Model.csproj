@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthModel.cs" />
+    <Compile Include="T_B_USERModel.cs" />
+    <Compile Include="EventMessageHandler.cs" />
     <Compile Include="MsgRequestModel.cs" />
     <Compile Include="T_D_TASK_MSTModel.cs" />
     <Compile Include="T_D_SQLDATA_SLVModel.cs" />
