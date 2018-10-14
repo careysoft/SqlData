@@ -20,7 +20,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         public FormSelectSqlData()
         {
             InitializeComponent();
-            List<Model.T_BASE_UNITTYPEModel> models = Access.UnitType.GetUnitTypeList();
+            List<Model.T_BASE_UNITTYPEModel> models = Access.UnitType.GetSqlDataUnitType();
             foreach (Model.T_BASE_UNITTYPEModel model in models) {
                 txt_GROUP.Properties.Items.Add(model);
             }
@@ -32,7 +32,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 return;
             }
             Model.T_BASE_UNITTYPEModel model = txt_GROUP.SelectedItem as Model.T_BASE_UNITTYPEModel;
-            gridControl1.DataSource = Access.SqlData.GetSqlDataListFromGroupId(model.LXBM);
+            gridControl1.DataSource = Access.SqlData.GetSqlDataListFromGroupId(model.LXBM).FindAll(delegate(Model.T_D_SQLDATA_MSTModel m) { return m.SFJY == 0; });
         }
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)

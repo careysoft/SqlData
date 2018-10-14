@@ -12,7 +12,36 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
 {
     public partial class FormMain : CareySoft.FormObject.FObject
     {
-        private Model.T_D_SQLDATA_MSTModel m_SqlDataModel = new Model.T_D_SQLDATA_MSTModel();
+        private Model.T_BASE_UNITTYPEModel m_GroupModel = new Model.T_BASE_UNITTYPEModel();
+
+        private Model.T_D_SQLDATA_MSTModel m_SelectSqlDataModel = new Model.T_D_SQLDATA_MSTModel();
+
+        /// <summary>
+        /// 设置对话框值
+        /// </summary>
+        /// <param name="sjypm"></param>
+        private void SetValue(string id)
+        {
+            m_SelectSqlDataModel = Access.SqlData.GetSqlDataModel(id);
+            Model.T_BASE_SJYPZModel sjy = Access.DataSource.GetSJYPZFromBM(m_SelectSqlDataModel.SJYID);
+            txt_SJYID.Text = sjy.PZMC;
+            txt_SJYID.Tag = sjy;
+            txt_SQLDATANAME.Text = m_SelectSqlDataModel.SQLDATANAME;
+            txt_SQLDATADISCRIBE.Text = m_SelectSqlDataModel.SQLDATADISCRIBE;
+            txt_SQLTYPE.SelectedIndex = Careysoft.Basic.Public.BConvert.ToInt(m_SelectSqlDataModel.SQLTYPE);
+            if (m_SelectSqlDataModel.SFJY == 0)
+            {
+                txt_SFJY_S.Checked = false;
+                txt_SFJY_F.Checked = true; 
+            }
+            else
+            {
+                txt_SFJY_S.Checked = true;
+                txt_SFJY_F.Checked = false; 
+            }
+            txt_SQL.Text = m_SelectSqlDataModel.SQL;
+            xtraTabControl1.TabPages.Clear();
+        }
 
         public FormMain()
         {
@@ -22,21 +51,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
         protected override void OnLoad(EventArgs e)
         {
             string id = m_Memo;
-            m_SqlDataModel = Access.SqlData.GetSqlDataModel(id);
-            Model.T_BASE_SJYPZModel sjy = Access.DataSource.GetSJYPZFromBM(m_SqlDataModel.SJYID);
-            txt_SJYID.Text = sjy.PZMC;
-            txt_SJYID.Tag = sjy;
-            txt_SQLDATANAME.Text = m_SqlDataModel.SQLDATANAME;
-            txt_SQLDATADISCRIBE.Text = m_SqlDataModel.SQLDATADISCRIBE;
-            txt_SQLTYPE.SelectedIndex = Careysoft.Basic.Public.BConvert.ToInt(m_SqlDataModel.SQLTYPE);
-            if (m_SqlDataModel.SFJY == 0)
+            m_GroupModel = Access.UnitType.GetUnitTypeModel(m_Memo);
+            List<Model.T_D_SQLDATA_MSTModel> sqlDatas = Access.SqlData.GetSqlDataListFromGroupId(m_Memo);
+            gridControl1.DataSource = sqlDatas;
+            if (sqlDatas.Count > 0)
             {
-                txt_SFJY_S.Checked = false;
+                SetValue(sqlDatas[0].ID);
             }
             else {
-                txt_SFJY_S.Checked = true;
+                Careysoft.Dev.Public.Function.EnableButton(false, Controls);
             }
-            txt_SQL.Text = m_SqlDataModel.SQL;
             base.OnLoad(e);
         }
 
@@ -84,7 +108,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
                 List<Model.T_D_SQLDATA_SLVModel> parameterList = new List<Model.T_D_SQLDATA_SLVModel>();
                 for (int i = 0; i < parameterArray.Length; i++)
                 {
-                    Model.T_D_SQLDATA_SLVModel parameterModel = m_SqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == parameterArray[i]; });
+                    Model.T_D_SQLDATA_SLVModel parameterModel = m_SelectSqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == parameterArray[i]; });
                     if (parameterModel != null)
                     {
                         parameterList.Add(parameterModel);
@@ -158,7 +182,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
                 txt_SQL.Focus();
                 return;
             }
-            Model.T_D_SQLDATA_MSTModel model = m_SqlDataModel;
+            Model.T_D_SQLDATA_MSTModel model = m_SelectSqlDataModel;
             string sql = txt_SQL.Text.ToUpper();
             Regex re = new Regex(@"&\w*");
             MatchCollection matchs = re.Matches(sql);
@@ -171,14 +195,14 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
             {
                 parameters = parameters.Substring(1);
                 //m_SqlDataModel.SLVList.RemoveAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return ("," + parameters + ",").IndexOf(",&" + m.PARAMETERNAME + ",") < 0; });
-                List<Model.T_D_SQLDATA_SLVModel> delSlvList = m_SqlDataModel.SLVList.FindAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return (";" + parameters + ";").IndexOf(";" + m.PARAMETERNAME + ";") < 0; });
+                List<Model.T_D_SQLDATA_SLVModel> delSlvList = m_SelectSqlDataModel.SLVList.FindAll(delegate(Model.T_D_SQLDATA_SLVModel m) { return (";" + parameters + ";").IndexOf(";" + m.PARAMETERNAME + ";") < 0; });
                 foreach (Model.T_D_SQLDATA_SLVModel m in delSlvList) {
                     m.SFSC = 1;
                 }
                 string[] arraySqlParameters = parameters.Split(';');
                 for (int i = 0; i < arraySqlParameters.Length; i++)
                 {
-                    Model.T_D_SQLDATA_SLVModel modelSlv = m_SqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == arraySqlParameters[i]; });
+                    Model.T_D_SQLDATA_SLVModel modelSlv = m_SelectSqlDataModel.SLVList.Find(delegate(Model.T_D_SQLDATA_SLVModel m) { return m.PARAMETERNAME == arraySqlParameters[i]; });
                     if (modelSlv == null)
                     {
                         modelSlv = new Model.T_D_SQLDATA_SLVModel();
@@ -194,7 +218,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
                 }
             }
             else {
-                foreach (Model.T_D_SQLDATA_SLVModel m in m_SqlDataModel.SLVList)
+                foreach (Model.T_D_SQLDATA_SLVModel m in m_SelectSqlDataModel.SLVList)
                 {
                     m.SFSC = 1;
                 }
@@ -215,8 +239,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
             if (Access.SqlData.SqlDataEdit(model))
             {
                 XtraMessageBox.Show("修改成功");
-                SetMessageToFormain(null, null);
-                m_SqlDataModel = Access.SqlData.GetSqlDataModel(m_Memo);
+                gridView1.SetFocusedRowCellValue("SQLDATANAME", model.SQLDATANAME);
+                SetValue(model.ID);
+                (gridView1.GetFocusedRow() as Model.T_D_SQLDATA_MSTModel).SFJY = m_SelectSqlDataModel.SFJY;
             }
             else
             {
@@ -243,13 +268,59 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData
         {
             if (XtraMessageBox.Show("是否要删除该SqlData?", "信息提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                if (Access.SqlData.SqlDataDel(m_Memo))
+                if (Access.SqlData.SqlDataDel(m_SelectSqlDataModel.ID))
                 {
-                    SetMessageToFormain(this, e);
+                    //SetMessageToFormain(this, e);
+                    int rowHandle = gridView1.FocusedRowHandle;
+                    List<Model.T_D_SQLDATA_MSTModel> sjys = Access.SqlData.GetSqlDataListFromGroupId(m_Memo);
+                    gridControl1.DataSource = sjys;
+                    gridView1.FocusedRowHandle = rowHandle - 1;
+                    if (sjys.Count == 0)
+                    {
+                        Careysoft.Dev.Public.Function.EnableButton(false, Controls);
+                        Careysoft.Dev.Public.Function.ClearText(Controls);
+                    }
                 }
                 else {
                     XtraMessageBox.Show("删除失败");
                 }
+            }
+        }
+
+        private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            Model.T_D_SQLDATA_MSTModel model = gridView1.GetFocusedRow() as Model.T_D_SQLDATA_MSTModel;
+            if (model == null)
+            {
+                return;
+            }
+            SetValue(model.ID);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            int rowHandle = gridView1.FocusedRowHandle;
+            List<Model.T_D_SQLDATA_MSTModel> sjys = Access.SqlData.GetSqlDataListFromGroupId(m_Memo);
+            gridControl1.DataSource = sjys;
+            gridView1.FocusedRowHandle = rowHandle;
+            if (sjys.Count > 0)
+            {
+                Careysoft.Dev.Public.Function.EnableButton(true, Controls);
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormAddSqlData f = new FormAddSqlData(m_GroupModel.LXBM);
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                List<Model.T_D_SQLDATA_MSTModel> sjys = Access.SqlData.GetSqlDataListFromGroupId(m_Memo);
+                gridControl1.DataSource = sjys;
+                if (sjys.Count == 1)
+                {
+                    Careysoft.Dev.Public.Function.EnableButton(true, Controls);
+                }
+                gridView1.FocusedRowHandle = sjys.Count - 1;
             }
         }
     }

@@ -11,8 +11,20 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
     public partial class FormAddTask : CareySoft.FormObject.FormShowDialogObject
     {
+        private string m_GroupId = "";
+
         public FormAddTask()
         {
+            InitializeComponent();
+            txt_BEGINDATE.DateTime = DateTime.Now;
+            txt_BEGINTIME.Time = DateTime.Now;
+            gridControl1.DataSource = new List<Model.T_D_TASK_SLVModel>();
+            gridControl2.DataSource = new List<Model.T_S_TASK_SLV_SLVModel>();
+        }
+
+        public FormAddTask(string groupId)
+        {
+            m_GroupId = groupId;
             InitializeComponent();
             txt_BEGINDATE.DateTime = DateTime.Now;
             txt_BEGINTIME.Time = DateTime.Now;
@@ -70,6 +82,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             modelMst.INTERVAL = Careysoft.Basic.Public.BConvert.ToInt(txt_INTERVAL.Text);
             modelMst.INTERVALTYPE = txt_INTERVALTYPE.SelectedIndex.ToString();
             modelMst.INTERVALADDTYPE = txt_INTERVALADDTYPE.SelectedIndex.ToString();
+            modelMst.GROUPID = m_GroupId;
             if (txt_SFJY_F.Checked) {
                 modelMst.SFJY = 0;
             }

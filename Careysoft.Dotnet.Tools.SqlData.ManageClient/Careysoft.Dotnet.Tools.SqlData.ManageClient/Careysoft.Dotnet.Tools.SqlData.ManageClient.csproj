@@ -42,7 +42,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Basic.Public\bin\Debug\Careysoft.Basic.Public.dll</HintPath>
     </Reference>
-    <Reference Include="Careysoft.Dev.Public">
+    <Reference Include="Careysoft.Dev.Public, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Dev.Public\bin\Debug\Careysoft.Dev.Public.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />

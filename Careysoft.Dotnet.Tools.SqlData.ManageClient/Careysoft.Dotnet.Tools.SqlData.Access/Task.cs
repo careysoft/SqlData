@@ -35,6 +35,14 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access
             return models;
         }
 
+        public static List<Model.T_D_TASK_MSTModel> GetGroupTask(string groupId)
+        {
+            List<Model.T_D_TASK_MSTModel> models = new List<Model.T_D_TASK_MSTModel>();
+            Access.FactoryT_D_TASK_MSTAccess af = new Access.FactoryT_D_TASK_MSTAccess();
+            models = af.QueryList("T.SFSC=0 AND T.GROUPID='" + groupId + "'", "T.ID");
+            return models;
+        }
+
         public static Model.T_D_TASK_MSTModel GetTaskFromId(string taskId) {
             Model.T_D_TASK_MSTModel model = new Model.T_D_TASK_MSTModel();
             Access.FactoryT_D_TASK_MSTAccess af = new Access.FactoryT_D_TASK_MSTAccess();

@@ -29,16 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition3 = new DevExpress.XtraGrid.StyleFormatCondition();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btn_del = new DevExpress.XtraEditors.SimpleButton();
             this.btn_save = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.txt_INTERVALADDTYPE = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.txt_TASKDISCRIBE = new DevExpress.XtraEditors.MemoEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txt_SFJY_F = new DevExpress.XtraEditors.CheckEdit();
@@ -89,13 +95,24 @@
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.txt_INTERVALADDTYPE = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemImageComboBox6 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.repositoryItemHyperLinkEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.repositoryItemButtonEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repositoryItemImageComboBox7 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_TASKDISCRIBE.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_SFJY_F.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_SFJY_S.Properties)).BeginInit();
@@ -127,7 +144,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
+            this.contextMenuStrip3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -136,9 +161,9 @@
             this.panelControl1.Controls.Add(this.btn_del);
             this.panelControl1.Controls.Add(this.btn_save);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 445);
+            this.panelControl1.Location = new System.Drawing.Point(226, 445);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(802, 55);
+            this.panelControl1.Size = new System.Drawing.Size(576, 55);
             this.panelControl1.TabIndex = 1;
             // 
             // btn_del
@@ -162,10 +187,10 @@
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Location = new System.Drawing.Point(226, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(802, 445);
+            this.xtraTabControl1.Size = new System.Drawing.Size(576, 445);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -192,8 +217,32 @@
             this.xtraTabPage1.Controls.Add(this.labelControl1);
             this.xtraTabPage1.Controls.Add(this.txt_TASKNAME);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(796, 418);
+            this.xtraTabPage1.Size = new System.Drawing.Size(570, 418);
             this.xtraTabPage1.Text = "    基本设置    ";
+            // 
+            // txt_INTERVALADDTYPE
+            // 
+            this.txt_INTERVALADDTYPE.EditValue = "执行开始时间间隔";
+            this.txt_INTERVALADDTYPE.Location = new System.Drawing.Point(97, 185);
+            this.txt_INTERVALADDTYPE.Name = "txt_INTERVALADDTYPE";
+            this.txt_INTERVALADDTYPE.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(95)))), ((int)(((byte)(95)))));
+            this.txt_INTERVALADDTYPE.Properties.Appearance.Options.UseBackColor = true;
+            this.txt_INTERVALADDTYPE.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txt_INTERVALADDTYPE.Properties.Items.AddRange(new object[] {
+            "执行开始时间间隔",
+            "执行完成后间隔"});
+            this.txt_INTERVALADDTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txt_INTERVALADDTYPE.Size = new System.Drawing.Size(151, 21);
+            this.txt_INTERVALADDTYPE.TabIndex = 28;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(16, 188);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(48, 14);
+            this.labelControl7.TabIndex = 27;
+            this.labelControl7.Text = "间隔方式";
             // 
             // txt_TASKDISCRIBE
             // 
@@ -361,7 +410,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.panelControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(796, 357);
+            this.xtraTabPage2.Size = new System.Drawing.Size(570, 418);
             this.xtraTabPage2.Text = "    SqlData      ";
             // 
             // panelControl2
@@ -372,7 +421,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(796, 357);
+            this.panelControl2.Size = new System.Drawing.Size(570, 418);
             this.panelControl2.TabIndex = 29;
             // 
             // panelControl3
@@ -381,7 +430,7 @@
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(2, 274);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(792, 81);
+            this.panelControl3.Size = new System.Drawing.Size(566, 142);
             this.panelControl3.TabIndex = 19;
             // 
             // gridControl2
@@ -401,7 +450,7 @@
             this.repositoryItemHyperLinkEdit2,
             this.repositoryItemButtonEdit2,
             this.repositoryItemImageComboBox4});
-            this.gridControl2.Size = new System.Drawing.Size(788, 77);
+            this.gridControl2.Size = new System.Drawing.Size(562, 138);
             this.gridControl2.TabIndex = 30;
             this.gridControl2.UseEmbeddedNavigator = true;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -436,12 +485,12 @@
             this.gridColumn7,
             this.gridColumn8});
             this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            styleFormatCondition3.Appearance.ForeColor = System.Drawing.Color.Red;
-            styleFormatCondition3.Appearance.Options.UseForeColor = true;
-            styleFormatCondition3.Condition = DevExpress.XtraGrid.FormatConditionEnum.Expression;
-            styleFormatCondition3.Expression = "[SFJY] == 1";
+            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition1.Appearance.Options.UseForeColor = true;
+            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Expression;
+            styleFormatCondition1.Expression = "[SFJY] == 1";
             this.gridView2.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition3});
+            styleFormatCondition1});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsPrint.AutoWidth = false;
@@ -511,15 +560,15 @@
             // 
             this.repositoryItemButtonEdit2.AutoHeight = false;
             this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "修改", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "修改", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
             // 
             // repositoryItemImageComboBox4
             // 
             this.repositoryItemImageComboBox4.AutoHeight = false;
             this.repositoryItemImageComboBox4.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "停用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "启用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "停用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "启用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.repositoryItemImageComboBox4.Name = "repositoryItemImageComboBox4";
             // 
             // splitterControl1
@@ -527,7 +576,7 @@
             this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitterControl1.Location = new System.Drawing.Point(2, 269);
             this.splitterControl1.Name = "splitterControl1";
-            this.splitterControl1.Size = new System.Drawing.Size(792, 5);
+            this.splitterControl1.Size = new System.Drawing.Size(566, 5);
             this.splitterControl1.TabIndex = 18;
             this.splitterControl1.TabStop = false;
             // 
@@ -549,7 +598,7 @@
             this.repositoryItemButtonEdit1,
             this.repositoryItemImageComboBox2,
             this.repositoryItemImageComboBox5});
-            this.gridControl1.Size = new System.Drawing.Size(792, 267);
+            this.gridControl1.Size = new System.Drawing.Size(566, 267);
             this.gridControl1.TabIndex = 17;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -588,12 +637,12 @@
             this.gridColumn5,
             this.gridColumn10});
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
-            styleFormatCondition1.Appearance.Options.UseForeColor = true;
-            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Expression;
-            styleFormatCondition1.Expression = "[SFJY] == 1";
+            styleFormatCondition2.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition2.Appearance.Options.UseForeColor = true;
+            styleFormatCondition2.Condition = DevExpress.XtraGrid.FormatConditionEnum.Expression;
+            styleFormatCondition2.Expression = "[SFJY] == 1";
             this.gridView1.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition1});
+            styleFormatCondition2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsPrint.AutoWidth = false;
@@ -746,29 +795,129 @@
             this.repositoryItemHyperLinkEdit1.AutoHeight = false;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             // 
-            // txt_INTERVALADDTYPE
+            // panelControl4
             // 
-            this.txt_INTERVALADDTYPE.EditValue = "执行开始时间间隔";
-            this.txt_INTERVALADDTYPE.Location = new System.Drawing.Point(97, 185);
-            this.txt_INTERVALADDTYPE.Name = "txt_INTERVALADDTYPE";
-            this.txt_INTERVALADDTYPE.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(95)))), ((int)(((byte)(95)))));
-            this.txt_INTERVALADDTYPE.Properties.Appearance.Options.UseBackColor = true;
-            this.txt_INTERVALADDTYPE.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.panelControl4.Controls.Add(this.gridControl3);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl4.Location = new System.Drawing.Point(0, 0);
+            this.panelControl4.Name = "panelControl4";
+            this.panelControl4.Size = new System.Drawing.Size(226, 500);
+            this.panelControl4.TabIndex = 3;
+            // 
+            // gridControl3
+            // 
+            this.gridControl3.ContextMenuStrip = this.contextMenuStrip3;
+            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gridControl3.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gridControl3.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gridControl3.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gridControl3.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gridControl3.EmbeddedNavigator.Buttons.Remove.Visible = false;
+            this.gridControl3.Location = new System.Drawing.Point(2, 2);
+            this.gridControl3.MainView = this.gridView3;
+            this.gridControl3.Name = "gridControl3";
+            this.gridControl3.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemImageComboBox6,
+            this.repositoryItemHyperLinkEdit3,
+            this.repositoryItemButtonEdit3,
+            this.repositoryItemImageComboBox7});
+            this.gridControl3.Size = new System.Drawing.Size(226, 496);
+            this.gridControl3.TabIndex = 25;
+            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView3});
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem6});
+            this.contextMenuStrip3.Name = "contextMenuStrip1";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(141, 54);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(140, 22);
+            this.toolStripMenuItem5.Text = "新增任务(&A)";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(140, 22);
+            this.toolStripMenuItem6.Text = "刷新(&R)";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // gridView3
+            // 
+            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn11});
+            this.gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            styleFormatCondition3.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition3.Appearance.Options.UseForeColor = true;
+            styleFormatCondition3.Condition = DevExpress.XtraGrid.FormatConditionEnum.Expression;
+            styleFormatCondition3.Expression = "[SFJY] == 1";
+            this.gridView3.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
+            styleFormatCondition3});
+            this.gridView3.GridControl = this.gridControl3;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsPrint.AutoWidth = false;
+            this.gridView3.OptionsView.ShowAutoFilterRow = true;
+            this.gridView3.OptionsView.ShowDetailButtons = false;
+            this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.OptionsView.ShowIndicator = false;
+            this.gridView3.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView3_FocusedRowChanged);
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.Caption = "任务名称";
+            this.gridColumn11.FieldName = "TASKNAME";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.AllowEdit = false;
+            this.gridColumn11.OptionsColumn.ReadOnly = true;
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 0;
+            this.gridColumn11.Width = 120;
+            // 
+            // repositoryItemImageComboBox6
+            // 
+            this.repositoryItemImageComboBox6.AutoHeight = false;
+            this.repositoryItemImageComboBox6.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txt_INTERVALADDTYPE.Properties.Items.AddRange(new object[] {
-            "执行开始时间间隔",
-            "执行完成后间隔"});
-            this.txt_INTERVALADDTYPE.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txt_INTERVALADDTYPE.Size = new System.Drawing.Size(151, 21);
-            this.txt_INTERVALADDTYPE.TabIndex = 28;
+            this.repositoryItemImageComboBox6.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("查询类", "0", -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("执行类", "1", -1)});
+            this.repositoryItemImageComboBox6.Name = "repositoryItemImageComboBox6";
             // 
-            // labelControl7
+            // repositoryItemHyperLinkEdit3
             // 
-            this.labelControl7.Location = new System.Drawing.Point(16, 188);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(48, 14);
-            this.labelControl7.TabIndex = 27;
-            this.labelControl7.Text = "间隔方式";
+            this.repositoryItemHyperLinkEdit3.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit3.Name = "repositoryItemHyperLinkEdit3";
+            // 
+            // repositoryItemButtonEdit3
+            // 
+            this.repositoryItemButtonEdit3.AutoHeight = false;
+            this.repositoryItemButtonEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "修改", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            this.repositoryItemButtonEdit3.Name = "repositoryItemButtonEdit3";
+            // 
+            // repositoryItemImageComboBox7
+            // 
+            this.repositoryItemImageComboBox7.AutoHeight = false;
+            this.repositoryItemImageComboBox7.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "停用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "启用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
+            this.repositoryItemImageComboBox7.Name = "repositoryItemImageComboBox7";
             // 
             // FormMain
             // 
@@ -777,6 +926,7 @@
             this.ClientSize = new System.Drawing.Size(802, 500);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.panelControl4);
             this.Name = "FormMain";
             this.Text = "FormMain";
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -785,6 +935,7 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_TASKDISCRIBE.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_SFJY_F.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_SFJY_S.Properties)).EndInit();
@@ -816,7 +967,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_INTERVALADDTYPE.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
+            this.contextMenuStrip3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -880,5 +1039,17 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private DevExpress.XtraEditors.ComboBoxEdit txt_INTERVALADDTYPE;
         private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraGrid.GridControl gridControl3;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox7;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
     }
 }

@@ -110,6 +110,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             StringBuilder sBuilder = new StringBuilder();
             sBuilder.Append("INSERT INTO T_D_TASK_MST(");
             sBuilder.Append("ID,");
+            sBuilder.Append("GROUPID,"); 
             sBuilder.Append("TASKNAME,");
             sBuilder.Append("TASKNUMBER,");
             sBuilder.Append("TASKDONUMBER,");
@@ -128,6 +129,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("INTERVALADDTYPE"); 
             sBuilder.Append(") VALUES(");
             sBuilder.Append(":ID,");
+            sBuilder.Append(":GROUPID,"); 
             sBuilder.Append(":TASKNAME,");
             sBuilder.Append(":TASKNUMBER,");
             sBuilder.Append(":TASKDONUMBER,");
@@ -162,7 +164,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
              new OracleParameter(":XGSJ",OracleType.VarChar),
              new OracleParameter(":SJC",OracleType.VarChar),
              new OracleParameter(":TASKDISCRIBE",OracleType.VarChar), 
-             new OracleParameter(":INTERVALADDTYPE",OracleType.VarChar) 
+             new OracleParameter(":INTERVALADDTYPE",OracleType.VarChar), 
+             new OracleParameter(":GROUPID",OracleType.VarChar) 
            };
             oparams[0].Value = af.GetID(T_BASE_PUBLIC.UNITNAMEKEY, "T_D_TASK_MST");//model.ID;
             oparams[1].Value = model.TASKNAME;
@@ -180,7 +183,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             oparams[13].Value = model.XGSJ;
             oparams[14].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC;
             oparams[15].Value = model.TASKDISCRIBE;
-            oparams[16].Value = model.INTERVALADDTYPE; 
+            oparams[16].Value = model.INTERVALADDTYPE;
+            oparams[17].Value = model.GROUPID; 
             listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams));
             foreach (Model.T_D_TASK_SLVModel m in model.SlvList) {
                 sBuilder.Remove(0, sBuilder.Length);
@@ -329,6 +333,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("XGR=:XGR,");
             sBuilder.Append("XGSJ=:XGSJ,");
             sBuilder.Append("SJC=:SJC,");
+            sBuilder.Append("GROUPID=:GROUPID,"); 
             sBuilder.Append("TASKDISCRIBE=:TASKDISCRIBE "); 
             sBuilder.Append("WHERE ID=:ID ");
             OracleParameter[] oparams ={
@@ -348,7 +353,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
              new OracleParameter(":XGSJ",OracleType.VarChar),
              new OracleParameter(":SJC",OracleType.VarChar), 
              new OracleParameter(":TASKDISCRIBE",OracleType.VarChar),
-             new OracleParameter(":INTERVALADDTYPE",OracleType.VarChar)  
+             new OracleParameter(":INTERVALADDTYPE",OracleType.VarChar),   
+             new OracleParameter(":GROUPID",OracleType.VarChar),   
            };
             oparams[0].Value = model.ID;
             oparams[1].Value = model.TASKNAME;
@@ -366,7 +372,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             oparams[13].Value = sjc.ToString("yyyyMMddHHmmss");//model.XGSJ;
             oparams[14].Value = sjc.ToString("yyyy-MM-dd HH:mm:ss.ffffff");//model.SJC;
             oparams[15].Value = model.TASKDISCRIBE;
-            oparams[16].Value = model.INTERVALADDTYPE; 
+            oparams[16].Value = model.INTERVALADDTYPE;
+            oparams[17].Value = model.GROUPID;  
             listParamters.Add(new XMLDbHelper.Paramers(sBuilder.ToString(), oparams));
             foreach (Model.T_D_TASK_SLVModel m in model.SlvList) {
                 if (String.IsNullOrEmpty(m.ID))
@@ -626,6 +633,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             StringBuilder sBuilder = new StringBuilder();
             sBuilder.Append("SELECT  ");
             sBuilder.Append("T.ID,");
+            sBuilder.Append("T.GROUPID,"); 
             sBuilder.Append("T.TASKNAME,");
             sBuilder.Append("T.TASKNUMBER,");
             sBuilder.Append("T.TASKDONUMBER,");
@@ -669,7 +677,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                 model.XGR = ToString(dr["XGR"]);
                 model.XGSJ = ToString(dr["XGSJ"]);
                 model.SJC = ToString(dr["SJC"]);
-                model.TASKDISCRIBE = ToString(dr["TASKDISCRIBE"]); 
+                model.TASKDISCRIBE = ToString(dr["TASKDISCRIBE"]);
+                model.GROUPID = ToString(dr["GROUPID"]);  
             }
             model.SlvList = QuerySlvList(id);
             return model;
@@ -799,6 +808,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             StringBuilder sBuilder = new StringBuilder();
             sBuilder.Append("SELECT  ");
             sBuilder.Append("T.ID,");
+            sBuilder.Append("T.GROUPID,"); 
             sBuilder.Append("T.TASKNAME,");
             sBuilder.Append("T.TASKNUMBER,");
             sBuilder.Append("T.TASKDONUMBER,");
@@ -848,6 +858,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                     model.XGSJ = ToString(dr["XGSJ"]);
                     model.SJC = ToString(dr["SJC"]);
                     model.TASKDISCRIBE = ToString(dr["TASKDISCRIBE"]);
+                    model.GROUPID = ToString(dr["GROUPID"]); 
                     models.Add(model);
                 }
             }

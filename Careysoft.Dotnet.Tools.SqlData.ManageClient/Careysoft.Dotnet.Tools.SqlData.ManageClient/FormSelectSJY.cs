@@ -15,24 +15,40 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         public FormSelectSJY()
         {
             InitializeComponent();
-            gridControl1.DataSource = Access.DataSource.GetAllSJYPZ();
+            List<Model.T_BASE_UNITTYPEModel> models = Access.UnitType.GetSJYPZUnitType();
+            foreach (Model.T_BASE_UNITTYPEModel model in models)
+            {
+                txt_GROUP.Properties.Items.Add(model);
+            }
         }
 
         public FormSelectSJY(string sjyid)
         {
             InitializeComponent();
-            gridControl1.DataSource = Access.DataSource.GetAllSJYPZ();
-            if (!String.IsNullOrEmpty(sjyid))
+            Model.T_BASE_SJYPZModel sjy = Access.DataSource.GetSJYPZFromBM(sjyid);
+            List<Model.T_BASE_UNITTYPEModel> models = Access.UnitType.GetSJYPZUnitType();
+            int selectIndex = -1;
+            for (int i = 0; i < models.Count; i++)
             {
-                int rowHandle = 0;
-                List<Model.T_BASE_SJYPZModel> models = gridControl1.DataSource as List<Model.T_BASE_SJYPZModel>;
-                for (rowHandle = 0; rowHandle < models.Count; rowHandle++)
+                txt_GROUP.Properties.Items.Add(models[i]);
+                if (models[i].LXBM == sjy.BL2) //BL2为数据源分组
                 {
-                    if (models[rowHandle].PZBM == sjyid)
+                    selectIndex = i;
+                }
+            }
+            txt_GROUP.SelectedIndex = selectIndex;
+            if (selectIndex != -1) {
+                Model.T_BASE_UNITTYPEModel model = txt_GROUP.SelectedItem as Model.T_BASE_UNITTYPEModel;
+                List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(model.LXBM);
+                int rowHandle = 0;
+                for (rowHandle = 0; rowHandle < sjys.Count; rowHandle++)
+                {
+                    if (sjys[rowHandle].PZBM == sjyid)
                     {
                         break;
                     }
                 }
+                gridControl1.DataSource = sjys;
                 gridView1.FocusedRowHandle = rowHandle;
             }
         }
@@ -51,6 +67,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             }
             SelectModel = model;
             DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void txt_GROUP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txt_GROUP.SelectedItem == null)
+            {
+                return;
+            }
+            Model.T_BASE_UNITTYPEModel model = txt_GROUP.SelectedItem as Model.T_BASE_UNITTYPEModel;
+            gridControl1.DataSource = Access.DataSource.GetSJYPZFromGroupId(model.LXBM);
         }
     }
 }

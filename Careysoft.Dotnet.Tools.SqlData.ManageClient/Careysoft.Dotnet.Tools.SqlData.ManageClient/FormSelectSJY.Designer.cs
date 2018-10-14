@@ -44,23 +44,24 @@
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemImageComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.txt_GROUP = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_GROUP.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
             this.gridControl1.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
             this.gridControl1.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gridControl1.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.Location = new System.Drawing.Point(0, 48);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -68,7 +69,7 @@
             this.repositoryItemHyperLinkEdit1,
             this.repositoryItemButtonEdit1,
             this.repositoryItemImageComboBox2});
-            this.gridControl1.Size = new System.Drawing.Size(721, 325);
+            this.gridControl1.Size = new System.Drawing.Size(721, 277);
             this.gridControl1.TabIndex = 15;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -218,11 +219,23 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "启用", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.repositoryItemImageComboBox2.Name = "repositoryItemImageComboBox2";
             // 
+            // txt_GROUP
+            // 
+            this.txt_GROUP.Location = new System.Drawing.Point(12, 12);
+            this.txt_GROUP.Name = "txt_GROUP";
+            this.txt_GROUP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txt_GROUP.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txt_GROUP.Size = new System.Drawing.Size(199, 21);
+            this.txt_GROUP.TabIndex = 16;
+            this.txt_GROUP.SelectedIndexChanged += new System.EventHandler(this.txt_GROUP_SelectedIndexChanged);
+            // 
             // FormSelectSJY
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 325);
+            this.Controls.Add(this.txt_GROUP);
             this.Controls.Add(this.gridControl1);
             this.Name = "FormSelectSJY";
             this.Text = "数据源选择";
@@ -232,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_GROUP.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -250,6 +264,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox2;
+        private DevExpress.XtraEditors.ComboBoxEdit txt_GROUP;
 
 
     }

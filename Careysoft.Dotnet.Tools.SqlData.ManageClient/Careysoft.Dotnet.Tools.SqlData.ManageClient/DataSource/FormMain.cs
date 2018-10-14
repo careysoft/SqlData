@@ -29,33 +29,6 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
             txt_sjylx.SelectedIndex = Convert.ToInt32(m_SelectSJYModel.BL1);
         }
 
-        private void EnableButton(bool val) {
-            foreach (Control control in Controls) {
-                string controlType = control.GetType().ToString();
-                controlType = controlType.Substring(controlType.LastIndexOf('.') + 1);
-                if ("SimpleButton,LabelControl".IndexOf(controlType) >= 0)
-                {
-                    control.Enabled = val;
-                }
-            }
-        }
-
-        private void ClearText() {
-            foreach (Control control in Controls)
-            {
-                string controlType = control.GetType().ToString();
-                controlType = controlType.Substring(controlType.LastIndexOf('.') + 1);
-                if ("TextEdit".IndexOf(controlType) >= 0)
-                {
-                    control.Text = "";
-                }
-                else if ("ComboBoxEdit".IndexOf(controlType) >= 0)
-                {
-                    (control as DevExpress.XtraEditors.ComboBoxEdit).SelectedIndex = -1;
-                }
-            }
-        }
-
         public FormMain()
         {
             InitializeComponent();
@@ -71,7 +44,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
                 SetValue(sjys[0].PZBM);
             }
             else {
-                EnableButton(false);
+                Careysoft.Dev.Public.Function.EnableButton(false, Controls);
             }
             base.OnLoad(e);
         }
@@ -231,8 +204,8 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
                     gridControl1.DataSource = sjys;
                     gridView1.FocusedRowHandle = rowHandle - 1;
                     if (sjys.Count == 0) {
-                        EnableButton(false);
-                        ClearText();
+                        Careysoft.Dev.Public.Function.EnableButton(false, Controls);
+                        Careysoft.Dev.Public.Function.ClearText(Controls);
                     }
                 }
                 else {
@@ -257,7 +230,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
                 List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
                 gridControl1.DataSource = sjys;
                 if (sjys.Count == 1) {
-                    EnableButton(true);
+                    Careysoft.Dev.Public.Function.EnableButton(true, Controls);
                 }
                 gridView1.FocusedRowHandle = sjys.Count - 1;
             }
@@ -269,6 +242,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource
             List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetSJYPZFromGroupId(m_Memo);
             gridControl1.DataSource = sjys;
             gridView1.FocusedRowHandle = rowHandle;
+            if (sjys.Count > 0) {
+                Careysoft.Dev.Public.Function.EnableButton(true, Controls);
+            }
         }
     }
 }

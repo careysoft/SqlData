@@ -24,6 +24,23 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
                 m_ID = value;
             }
         }
+
+        private string m_GROUPID;
+        ///<summary>
+        ///任务组
+        ///</summary>
+        public string GROUPID
+        {
+            get
+            {
+                return m_GROUPID;
+            }
+            set
+            {
+                m_GROUPID = value;
+            }
+        }
+        
         private string m_TASKNAME;
         ///<summary>
         ///任务名
