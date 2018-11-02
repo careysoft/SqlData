@@ -212,6 +212,15 @@ namespace Careysoft.Dotnet.Tools.SqlData.Model
             }
         }
 
+        /// <summary>
+        /// SQLData是否禁用
+        /// </summary>
+        public int SQLDATASFJY { get; set; }
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public int SQLDATASFSC { get; set; }
+
         private List<Model.T_S_TASK_SLV_SLVModel> m_SlvList = new List<T_S_TASK_SLV_SLVModel>();
         public List<Model.T_S_TASK_SLV_SLVModel> SlvList {
             get { return m_SlvList; }

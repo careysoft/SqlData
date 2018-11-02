@@ -9,6 +9,10 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using System.Reflection;
 using CareySoft.FormObject;
+using WebSocket4Net;
+using System.Configuration;
+using Careysoft.Dotnet.Server.MessageServer.Model;
+using System.Threading;
 
 namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 {
@@ -41,8 +45,6 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         }
 
         private Dictionary<string, string> m_DicFromClass = new Dictionary<string, string>();
-
-        private int m_ConnectDBFailTime = 0;
 
         private DevExpress.XtraNavBar.ViewInfo.NavBarHintInfo m_MouseMovingControlObject = null; //鼠标正在哪个控件
 
@@ -177,64 +179,6 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
                 navGroup.Expanded = dict.ContainsKey(group.LXMC) ? dict[group.LXMC] : true; ;
                 navBarControl1.Groups.Add(navGroup);
             }
-            
-            //NavBarGroup nb2 = new NavBarGroup("数据源");
-            //List<Model.T_BASE_SJYPZModel> sjys = Access.DataSource.GetAllSJYPZ();
-            //foreach (Model.T_BASE_SJYPZModel mm in sjys)
-            //{
-            //    NavBarItem ni = new NavBarItem(mm.PZMC);
-            //    NavBarItemTag nbt = new NavBarItemTag(mm.PZMC, "Careysoft.Dotnet.Tools.SqlData.ManageClient.DataSource.FormMain", "Careysoft.Dotnet.Tools.SqlData.ManageClient.exe", mm.PZBM);
-            //    ni.Tag = nbt;
-            //    ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
-            //    navBarControl1.Items.Add(ni);
-            //    NavBarItemLink nil = new NavBarItemLink(ni);
-            //    nb2.ItemLinks.Add(nil);
-            //}
-            //nb2.Expanded = dict.ContainsKey("数据源") ? dict["数据源"] : true;//true;
-            //navBarControl1.Groups.Add(nb2);
-
-            //NavBarGroup nb3 = new NavBarGroup("任务组");
-            //List<Model.T_D_TASK_MSTModel> tasks = Access.Task.GetAllTask();
-            //foreach (Model.T_D_TASK_MSTModel mm in tasks) {
-            //    NavBarItem ni = new NavBarItem(mm.TASKNAME);
-            //    NavBarItemTag nbt = new NavBarItemTag(mm.TASKNAME, "Careysoft.Dotnet.Tools.SqlData.ManageClient.Task.FormMain", "Careysoft.Dotnet.Tools.SqlData.ManageClient.exe", mm.ID);
-            //    ni.Tag = nbt;
-            //    ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
-            //    navBarControl1.Items.Add(ni);
-            //    NavBarItemLink nil = new NavBarItemLink(ni);
-            //    nb3.ItemLinks.Add(nil);
-            //}
-            //nb3.Expanded = dict.ContainsKey("任务组") ? dict["任务组"] : true;
-            //navBarControl1.Groups.Add(nb3);
-
-            //List<Model.T_BASE_UNITTYPEModel> unittypes = Access.UnitType.GetUnitTypeList();
-            //List<Model.T_D_SQLDATA_MSTModel> sqlDatas = Access.SqlData.GetAllSqlDataList();
-            //foreach (Model.T_BASE_UNITTYPEModel m in unittypes)
-            //{
-            //    NavBarGroup nb = new NavBarGroup(m.LXMC);
-            //    nb.Tag = m.LXBM;
-            //    List<Model.T_D_SQLDATA_MSTModel> slist = sqlDatas.FindAll(delegate(Model.T_D_SQLDATA_MSTModel mm) { return mm.UNITTYPEID == m.LXBM; });
-            //    foreach (Model.T_D_SQLDATA_MSTModel mm in slist)
-            //    {
-            //        NavBarItem ni = new NavBarItem(mm.SQLDATANAME);
-            //        NavBarItemTag nbt = new NavBarItemTag(mm.SQLDATANAME, "Careysoft.Dotnet.Tools.SqlData.ManageClient.SqlData.FormMain", "Careysoft.Dotnet.Tools.SqlData.ManageClient.exe", mm.ID);
-            //        ni.Tag = nbt;
-            //        ni.LinkClicked += new NavBarLinkEventHandler(ShowForm);
-            //        navBarControl1.Items.Add(ni);
-            //        NavBarItemLink nil = new NavBarItemLink(ni);
-            //        if (mm.SFJY == 1)
-            //        {
-            //            nil.Item.Appearance.ForeColor = Color.DarkGray;
-            //        }
-            //        if (mm.SQLDATANAME.IndexOf("(") > 0)
-            //        {
-            //            nil.Item.Appearance.ForeColor = Color.FromArgb(255, 128, 128);
-            //        }
-            //        nb.ItemLinks.Add(nil);
-            //    }
-            //    nb.Expanded = dict.ContainsKey(m.LXMC) ? dict[m.LXMC] : true; ;
-            //    navBarControl1.Groups.Add(nb);
-            //}
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -243,7 +187,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
             InitFormClass();
             InitSubMenu();
             LoadNav();
-            timer1.Enabled = true;
+            ConnectAutoServer();
         }
 
         /// <summary>
@@ -325,16 +269,10 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            timer1.Enabled = false;
             if (XtraMessageBox.Show("您确认要退出Sql Data?", "信息提示", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes) {
-                timer1.Enabled = true;
+                CloseAutoServer();
                 e.Cancel = true;
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //LoadNav();
         }
 
         /// <summary>
@@ -406,5 +344,169 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient
         {
             LoadNav();
         }
+
+        #region 连接自动处理服务
+        private WebSocket4Net.WebSocket m_WebSocketClient = null;
+
+        private string m_PrivateKey = "";
+
+        private bool m_AutoServerConnected = false;
+
+        private Thread m_TimerThread = null;
+
+        private int m_ConnectingCount = 5;
+
+        private bool m_Checked = true;
+
+        private void ConnectAutoServer()
+        {
+            m_WebSocketClient = new WebSocket4Net.WebSocket(string.Format("ws://{0}:{1}/websocket", ConfigurationManager.AppSettings["MessageIpAddr"], ConfigurationManager.AppSettings["MessagePort"]), "basic", WebSocketVersion.Rfc6455);
+            m_WebSocketClient.MessageReceived += new EventHandler<MessageReceivedEventArgs>(m_WebSocketClient_MessageReceived);
+            m_WebSocketClient.Closed += new EventHandler(m_WebSocketClient_Closed);
+            m_WebSocketClient.Open();
+            Thread.Sleep(1000);
+            if (m_WebSocketClient.State != WebSocketState.Open)
+            {
+                lab_connection.Caption = "未能连接到消息服务器";
+                lab_connection.Appearance.ForeColor = Color.Tomato;
+            }
+        }
+
+
+        private void CloseAutoServer() {
+            m_WebSocketClient.Close();
+            if (m_TimerThread != null)
+            {
+                m_TimerThread.Abort();
+                m_TimerThread = null;
+            }
+        }
+
+        void m_WebSocketClient_Closed(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    lab_connection.Appearance.ForeColor = Color.Coral;
+                    lab_connection.Caption = "未能连接到消息服务器";
+                    m_Checked = false;
+                });
+            }
+        }
+
+        void m_WebSocketClient_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            MessageModel model = new MessageModel(e.Message);
+            switch (model.Command)
+            {
+                case EnumCommand.AuthQuestion:
+                    m_WebSocketClient.Send(EnumCommand.AuthUser + " " + ConfigurationManager.AppSettings["ClientCode"] + "$aaa");
+                    break;
+                case EnumCommand.AuthAccept:
+                    m_PrivateKey = Careysoft.Basic.Public.DES.Decrypt(model.Body, DateTime.Now.AddDays(-1).ToString("yyyyMMdd"));
+                    StartTmmerCheck();
+                    break;
+                case EnumCommand.MessagePoint:
+                    string body = model.Body;
+                    body = Careysoft.Basic.Public.DES.Decrypt(body, m_PrivateKey);
+                    MessageBodyModel msgModel = Careysoft.Basic.Public.ObjectSerializer.Xml16ToInstances<MessageBodyModel>(body);
+                    DoMessagePoint(msgModel);
+                    //发送
+                    break;
+            }
+        }
+
+        private void DoMessagePoint(MessageBodyModel msgModel)
+        {
+            Model.EnumServerMessage messageContent = (Model.EnumServerMessage)Enum.Parse(typeof(Model.EnumServerMessage), msgModel.MessageContent);
+            m_AutoServerConnected = true;
+            switch (messageContent)
+            {
+                case Model.EnumServerMessage.StateWorked:
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                lab_connection.Appearance.ForeColor = Color.LightGreen;
+                                lab_connection.Caption = "自动服务状态:正常运行";
+                                m_Checked = false;
+                            });
+                        }
+                    }
+                    break;
+                case Model.EnumServerMessage.StateNoWork:
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                lab_connection.Appearance.ForeColor = Color.Coral;
+                                lab_connection.Caption = "自动服务状态:服务停止";
+                                m_Checked = false;
+                            });
+                        }
+                    }
+                    break;
+                case Model.EnumServerMessage.StateShutdown:
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                lab_connection.Appearance.ForeColor = Color.Coral;
+                                lab_connection.Caption = "自动服务状态:服务停止";
+                                m_Checked = false;
+                            });
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void StartTmmerCheck()
+        {
+            m_Checked = true;
+            m_AutoServerConnected = false;
+            m_TimerThread = new Thread(TimmerCheck);
+            m_TimerThread.Start();
+        }
+
+        private void TimmerCheck()
+        {
+            while (m_Checked)
+            {
+                if (!m_AutoServerConnected)
+                {
+                    MessageBodyModel bodyModel = new MessageBodyModel();
+                    bodyModel.Header.TargetCode = ConfigurationManager.AppSettings["AutoExecuteClientCode"];
+                    bodyModel.Header.SourceCode = ConfigurationManager.AppSettings["ClientCode"];
+                    bodyModel.Header.MessageType = EnumMessageType.Point;
+                    bodyModel.Header.TagetType = EnumClientType.Normal;
+                    bodyModel.MessageContentType = EnumMessageContentType.Text;
+                    bodyModel.MessageContent = Model.EnumServerMessage.QueryState.ToString();
+                    string sendMessage = Careysoft.Basic.Public.ObjectSerializer.InstancesToXML<MessageBodyModel>(bodyModel);
+                    sendMessage = Careysoft.Basic.Public.DES.Encrypt(sendMessage, m_PrivateKey);
+                    MessageModel model2 = new MessageModel(EnumCommand.MessagePoint, sendMessage);
+                    m_WebSocketClient.Send(model2.ToString());
+                    m_ConnectingCount--;
+                    if (m_ConnectingCount == 0)
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                lab_connection.Appearance.ForeColor = Color.Tomato;
+                                lab_connection.Caption = "自动服务状态:服务停止";
+                                m_Checked = false;
+                            });
+                        }
+                    }
+                }
+                Thread.Sleep(2000);
+            }
+        }
+        #endregion
     }
 }

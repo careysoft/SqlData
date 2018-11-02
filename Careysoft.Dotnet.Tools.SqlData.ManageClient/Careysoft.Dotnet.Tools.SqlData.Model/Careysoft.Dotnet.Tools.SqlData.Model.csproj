@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthModel.cs" />
+    <Compile Include="EnumClass.cs" />
     <Compile Include="T_B_USERModel.cs" />
     <Compile Include="EventMessageHandler.cs" />
     <Compile Include="MsgRequestModel.cs" />

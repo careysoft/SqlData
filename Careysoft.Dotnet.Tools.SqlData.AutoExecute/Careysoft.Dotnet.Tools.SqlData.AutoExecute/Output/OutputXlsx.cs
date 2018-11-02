@@ -13,16 +13,16 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute.Output
         {
             try
             {
-                outputPath = outputPath + ".xlsx";
+                string outputFile = outputPath + ".xlsx";
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    if (File.Exists(outputPath))
+                    if (File.Exists(outputFile))
                     {
-                        File.Delete(outputPath);
+                        File.Delete(outputFile);
                     }
-                    using (var excel = new ExcelPackage(new FileInfo(outputPath)))
+                    using (var excel = new ExcelPackage(new FileInfo(outputFile)))
                     {
-                        string sheelname = outputPath.Substring(outputPath.LastIndexOf('\\') + 1, outputPath.LastIndexOf('.') - outputPath.LastIndexOf('\\') - 1);
+                        string sheelname = outputFile.Substring(outputFile.LastIndexOf('\\') + 1, outputFile.LastIndexOf('.') - outputFile.LastIndexOf('\\') - 1);
                         var ws = excel.Workbook.Worksheets.Add(sheelname);
                         for (int i = 0; i < dt.Columns.Count; i++)
                         {

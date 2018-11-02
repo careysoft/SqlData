@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using WebSocket4Net;
+using System.Configuration;
+using Careysoft.Dotnet.Server.MessageServer.Model;
+using System.Threading;
 
 namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.Task
 {
@@ -368,6 +372,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.ManageClient.Task
                 }
                 gridView3.FocusedRowHandle = sjys.Count - 1;
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
         }
 
     }

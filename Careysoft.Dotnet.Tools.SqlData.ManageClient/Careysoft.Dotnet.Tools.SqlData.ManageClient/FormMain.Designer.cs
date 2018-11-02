@@ -40,6 +40,7 @@
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
+            this.lab_connection = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -50,7 +51,6 @@
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.splitter1 = new DevExpress.XtraEditors.SplitterControl();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -83,9 +83,10 @@
             this.barSubItem2,
             this.barSubItem3,
             this.barSubItem4,
-            this.barButtonItem3});
+            this.barButtonItem3,
+            this.lab_connection});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 8;
+            this.barManager1.MaxItemId = 11;
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar2
@@ -148,10 +149,20 @@
             this.bar3.DockCol = 0;
             this.bar3.DockRow = 0;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Caption, this.lab_connection, "AutoServerState")});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
             this.bar3.Text = "Status bar";
+            // 
+            // lab_connection
+            // 
+            this.lab_connection.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.lab_connection.Caption = "正在连接服务器...";
+            this.lab_connection.Id = 10;
+            this.lab_connection.Name = "lab_connection";
+            this.lab_connection.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barDockControlTop
             // 
@@ -164,22 +175,22 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 424);
-            this.barDockControlBottom.Size = new System.Drawing.Size(913, 23);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 420);
+            this.barDockControlBottom.Size = new System.Drawing.Size(913, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 400);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 396);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(913, 24);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 400);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 396);
             // 
             // barButtonItem2
             // 
@@ -209,7 +220,7 @@
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 169;
             this.navBarControl1.OptionsNavPane.ShowOverflowPanel = false;
-            this.navBarControl1.Size = new System.Drawing.Size(219, 400);
+            this.navBarControl1.Size = new System.Drawing.Size(219, 396);
             this.navBarControl1.TabIndex = 6;
             this.navBarControl1.Text = "navBarControl1";
             this.navBarControl1.GetHint += new DevExpress.XtraNavBar.NavBarGetHintEventHandler(this.navBarControl1_GetHint);
@@ -225,14 +236,9 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(219, 24);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(5, 400);
+            this.splitter1.Size = new System.Drawing.Size(5, 396);
             this.splitter1.TabIndex = 11;
             this.splitter1.TabStop = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 60000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormMain
             // 
@@ -275,7 +281,6 @@
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraEditors.SplitterControl splitter1;
         private DevExpress.XtraNavBar.NavBarControl navBarControl1;
-        private System.Windows.Forms.Timer timer1;
         private DevExpress.XtraBars.BarSubItem barSubItem2;
         private DevExpress.XtraBars.BarSubItem barSubItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
@@ -283,6 +288,7 @@
         private DevExpress.XtraBars.BarToolbarsListItem barToolbarsListItem1;
         private DevExpress.XtraBars.BarSubItem barSubItem4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private DevExpress.XtraBars.BarStaticItem lab_connection;
 
     }
 }

@@ -170,7 +170,13 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
 
         private void TaskDo() {
             foreach (Model.T_D_TASK_SLVModel model in m_TaskModel.SlvList) {
-                SqlDataDo(model);        
+                if (model.SQLDATASFJY == 0 && model.SQLDATASFSC == 0)
+                {//SQLDATA禁用或删除后，则不能执行
+                    SqlDataDo(model);
+                }
+                else {
+                    ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:SQLDATA被禁用{1}", m_TaskModel.TASKNAME, model.SQLDATANAME));
+                }
             }
         }
 
@@ -196,6 +202,11 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                     ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:未找到数据源", m_TaskModel.TASKNAME));
                     return;
                 }
+                if (sjyModel.SFSC==1)
+                {
+                    ThreadSendMessage("error", "SqlDataDo", String.Format("{0}:数据源已删除", m_TaskModel.TASKNAME));
+                    return;
+                }
                 string errorinfo = "";
                 if (model.SQLTYPE == "0")
                 {
@@ -207,6 +218,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                         foreach (DataTable dt in dataTables)
                         {
                             string outPutPath = model.OUTPUTPATH[model.OUTPUTPATH.Length - 1] == '\\' ? model.OUTPUTPATH : model.OUTPUTPATH+"\\";
+                            if (!System.IO.Directory.Exists(outPutPath)) {
+                                System.IO.Directory.CreateDirectory(outPutPath);
+                            }
                             string fileName = outPutPath + model.SQLDATANAME;
                             var output = Output.OutputCreater.CreateOutput(model.OUTPUTTYPE);
                             output.OutputData(dt, fileName, ref errorinfo);

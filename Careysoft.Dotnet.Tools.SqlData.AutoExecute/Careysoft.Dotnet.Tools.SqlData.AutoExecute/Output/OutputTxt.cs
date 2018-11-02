@@ -12,17 +12,17 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute.Output
         {
             try
             {
-                outputPath = outputPath + ".txt";
+                string outputFile = outputPath + ".txt";
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    if (File.Exists(outputPath))
+                    if (File.Exists(outputFile))
                     {
-                        File.Delete(outputPath);
+                        File.Delete(outputFile);
                     }
                     FileStream fileStream = null;
                     try
                     {
-                        fileStream = File.Create(outputPath);
+                        fileStream = File.Create(outputFile);
                     }
                     finally
                     {
@@ -31,18 +31,18 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute.Output
                     }
                     StringBuilder sBuilder = new StringBuilder();
                     string rowString = "";
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
-                        if (j == 0)
-                        {
-                            rowString += Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
-                        }
-                        else
-                        {
-                            rowString += "\t" + Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
-                        }
-                    }
-                    sBuilder.AppendLine(rowString);
+                    //for (int j = 0; j < dt.Columns.Count; j++)
+                    //{
+                    //    if (j == 0)
+                    //    {
+                    //        rowString += Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
+                    //    }
+                    //    else
+                    //    {
+                    //        rowString += "\t" + Careysoft.Basic.Public.BConvert.ToString(dt.Columns[j].ColumnName);
+                    //    }
+                    //}
+                    //sBuilder.AppendLine(rowString);
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         rowString = "";
@@ -59,7 +59,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute.Output
                         }
                         sBuilder.AppendLine(rowString);
                     }
-                    using (StreamWriter sw = new StreamWriter(outputPath, true, Encoding.Unicode))
+                    using (StreamWriter sw = new StreamWriter(outputFile, true, Encoding.Unicode))
                     {
                         sw.Write(sBuilder.ToString());
                     }

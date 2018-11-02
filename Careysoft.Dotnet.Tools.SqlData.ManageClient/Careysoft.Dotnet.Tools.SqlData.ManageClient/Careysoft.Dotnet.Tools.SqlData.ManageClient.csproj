@@ -16,7 +16,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Dev.Public\bin\Debug\Careysoft.Dev.Public.dll</HintPath>
     </Reference>
+    <Reference Include="Careysoft.Dotnet.Server.MessageServer.Model">
+      <HintPath>..\..\..\..\..\52MessageServer\GitHub\MessageServer\Careysoft.Dotnet.Server.MessageServer.Host\Careysoft.Dotnet.Server.MessageServer.Host\bin\Debug\Careysoft.Dotnet.Server.MessageServer.Model.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -57,7 +60,11 @@
     <Reference Include="FormObject">
       <HintPath>..\..\..\..\..\99公共模块\FormObject\bin\Debug\FormObject.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\公共安装\16json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,6 +74,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\..\..\..\..\..\公共安装\28socket\SuperSocket\SuperSocketClient\WebSocket4Net(0.14.1)\net40\Debug\WebSocket4Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSource\FormMain.cs">
@@ -74,6 +84,12 @@
     </Compile>
     <Compile Include="DataSource\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConnecting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConnecting.Designer.cs">
+      <DependentUpon>FormConnecting.cs</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
@@ -169,6 +185,9 @@
     </Compile>
     <EmbeddedResource Include="DataSource\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConnecting.resx">
+      <DependentUpon>FormConnecting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

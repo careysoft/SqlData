@@ -696,7 +696,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
             sBuilder.Append("T3.PZBM SJYBM,"); 
             sBuilder.Append("T2.SQLDATANAME,");
             sBuilder.Append("T2.SQLTYPE,");
-            sBuilder.Append("T2.SQL,"); 
+            sBuilder.Append("T2.SQL,");
+            sBuilder.Append("T2.SFJY SQLDATASFJY,");
+            sBuilder.Append("T2.SFSC SQLDATASFSC,"); 
             sBuilder.Append("T.MSTID,");
             sBuilder.Append("T.SQLDATAID,");
             sBuilder.Append("T.BL1,");
@@ -740,7 +742,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.Access.Access.Oracle
                     model.SQLDATANAME = ToString(dr["SQLDATANAME"]);
                     model.SQLTYPE = ToString(dr["SQLTYPE"]);
                     model.SQL = ToString(dr["SQL"]);
-                    model.SJYBM = ToString(dr["SJYBM"]);  
+                    model.SJYBM = ToString(dr["SJYBM"]);
+                    model.SQLDATASFJY = ToInt(dr["SQLDATASFJY"]);
+                    model.SQLDATASFSC = ToInt(dr["SQLDATASFSC"]);  
                     model.SlvList = QuerySlvSlvList(model.ID);
                     models.Add(model);
                 }

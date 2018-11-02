@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Collections.Concurrent;
+using System.Configuration;
 
 namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
 {
@@ -13,9 +14,15 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
 
         private ConcurrentBag<TaskThread> m_TaskThreadList = new ConcurrentBag<TaskThread>();
 
+        private bool m_Worked = false;
+        public bool Worked {
+            get { return m_Worked; }
+            set { m_Worked = value; }
+        }
+
         public TaskServer()
-        { 
-            
+        {
+
         }
 
         public bool TaskInit() {
@@ -27,6 +34,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                 taskThread.StartTask(ref errorinfo);
                 m_TaskThreadList.Add(taskThread);
             }
+            m_Worked = true;
             return true;
         }
         private void EventReciveThreadMessage(Model.EventMessageModel model)
@@ -44,6 +52,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AutoExecute
                     task.StopTaskForce(ref errorinfo);
                 }
             }
+            m_Worked = false;
             return true;
         }
 

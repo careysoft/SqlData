@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Careysoft.Basic.Public, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\99公共模块\Careysoft.Basic\Careysoft.Basic.Public\bin\Debug\Careysoft.Basic.Public.dll</HintPath>
+    </Reference>
+    <Reference Include="Careysoft.Dotnet.Tools.SqlData.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Careysoft.Dotnet.Tools.SqlData.ManageClient\Careysoft.Dotnet.Tools.SqlData.ManageClient\bin\Debug\Careysoft.Dotnet.Tools.SqlData.Model.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,17 +56,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.AutoExecute\Careysoft.Dotnet.Tools.SqlData.AutoExecute.csproj">
       <Project>{21E95794-5AD8-4038-AEFC-A667AB7D5E2C}</Project>
       <Name>Careysoft.Dotnet.Tools.SqlData.AutoExecute</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Careysoft.Dotnet.Tools.SqlData.Model\Careysoft.Dotnet.Tools.SqlData.Model.csproj">
-      <Project>{DE7D982A-9FB4-48FE-B692-09864BB2BD9E}</Project>
-      <Name>Careysoft.Dotnet.Tools.SqlData.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

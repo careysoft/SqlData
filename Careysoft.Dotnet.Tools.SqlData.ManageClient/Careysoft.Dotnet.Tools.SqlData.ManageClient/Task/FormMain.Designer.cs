@@ -99,7 +99,7 @@
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -168,7 +168,7 @@
             // 
             // btn_del
             // 
-            this.btn_del.Location = new System.Drawing.Point(127, 17);
+            this.btn_del.Location = new System.Drawing.Point(123, 19);
             this.btn_del.Name = "btn_del";
             this.btn_del.Size = new System.Drawing.Size(75, 23);
             this.btn_del.TabIndex = 1;
@@ -177,7 +177,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(27, 17);
+            this.btn_save.Location = new System.Drawing.Point(23, 19);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 0;
@@ -807,7 +807,7 @@
             // gridControl3
             // 
             this.gridControl3.ContextMenuStrip = this.contextMenuStrip3;
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl3.EmbeddedNavigator.Buttons.Append.Visible = false;
             this.gridControl3.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
             this.gridControl3.EmbeddedNavigator.Buttons.Edit.Visible = false;
@@ -821,7 +821,7 @@
             this.repositoryItemHyperLinkEdit3,
             this.repositoryItemButtonEdit3,
             this.repositoryItemImageComboBox7});
-            this.gridControl3.Size = new System.Drawing.Size(226, 496);
+            this.gridControl3.Size = new System.Drawing.Size(222, 496);
             this.gridControl3.TabIndex = 25;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -830,7 +830,7 @@
             // 
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem5,
-            this.toolStripSeparator1,
+            this.toolStripSeparator2,
             this.toolStripMenuItem6});
             this.contextMenuStrip3.Name = "contextMenuStrip1";
             this.contextMenuStrip3.Size = new System.Drawing.Size(141, 54);
@@ -842,10 +842,11 @@
             this.toolStripMenuItem5.Text = "新增任务(&A)";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
-            // toolStripSeparator1
+            // toolStripSeparator2
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator2.Visible = false;
             // 
             // toolStripMenuItem6
             // 
@@ -1049,7 +1050,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox7;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

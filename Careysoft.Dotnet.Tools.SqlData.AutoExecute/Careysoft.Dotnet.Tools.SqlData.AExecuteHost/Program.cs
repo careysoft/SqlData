@@ -11,25 +11,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.AExecuteHost
         static void Main(string[] args)
         {
             Console.WriteLine("Press wait to start the server!");
-
-            //var websocketserver = BootstrapFactory.CreateBootstrap();
-            //if (!websocketserver.Initialize())
-            //{
-            //    Console.WriteLine("Failed to initialize!");
-            //    Console.ReadKey();
-            //    return;
-            //}
-
-            //Console.WriteLine();
-            //if (websocketserver.Start() == SuperSocket.SocketBase.StartResult.Failed)
-            //{
-            //    Console.WriteLine("Failed to start!");
-            //    Console.ReadKey();
-            //    return;
-            //}
-            TaskServer taskServer = new TaskServer();
-            taskServer.EventRecieveThreadMessage += new Model.EventMessageHandler(EventReceiveThreadMessage);
-            if (!taskServer.TaskInit()) {
+            AutoServer autoServer = new AutoServer();
+            autoServer.EventReceiveThreadMessage += new Model.EventMessageHandler(EventReceiveThreadMessage);
+            if (!autoServer.StartServer()) {
                 Console.WriteLine("The server started fail!");
                 return;
             }
@@ -44,7 +28,7 @@ namespace Careysoft.Dotnet.Tools.SqlData.AExecuteHost
                 continue;
             }
 
-            taskServer.TaskDispose();
+            autoServer.StopServer();
             //Stop the appServer
             //websocketserver.Stop();
 
@@ -54,6 +38,9 @@ namespace Careysoft.Dotnet.Tools.SqlData.AExecuteHost
 
         static void EventReceiveThreadMessage(Model.EventMessageModel model) {
             Console.WriteLine(model.ToString());
+            if (model.Code == "error") {
+                Careysoft.Basic.Public.Log.ErrorWrite(model.ToString());
+            }
         }
     }
 }
